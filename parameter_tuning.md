@@ -364,3 +364,17 @@ Training with 30 epochs balanced convergence and overfitting for multi-property 
 
 ---
 
+## 📝 2026-07-08 15:26:37
+
+**原始Prompt**: 基于 TS2.xyz、TS5.xyz、TS8.xyz，分析C-H键活化过程中的可能过渡态构型，并进行DFT优化。
+
+**Pipeline类型**: mechanism_discovery
+
+- 泛函：B3LYP-D3(BJ) 或 M06-2X，对C-H键活化过渡态有良好描述。
+- 基组：def2-SVP（优化）/ def2-TZVP（单点能校正）。
+- 溶剂模型：SMD (对应实验溶剂)。
+- 过渡态优化设置：`Opt=TS, CalcFC, NoEigenTest, Freq`，网格使用 `Grid=UltraFine`。
+- 收敛标准可适当提高：`Conver=7` 或 `TightOpt`。
+
+---
+

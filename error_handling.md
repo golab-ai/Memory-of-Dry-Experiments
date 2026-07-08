@@ -207,3 +207,15 @@ SCF不收敛：使用scf=xqc或调整积分格点（Int=UltraFine）；
 
 ---
 
+## 📝 2026-07-08 15:26:37
+
+**原始Prompt**: 基于 TS2.xyz、TS5.xyz、TS8.xyz，分析C-H键活化过程中的可能过渡态构型，并进行DFT优化。
+
+**Pipeline类型**: mechanism_discovery
+
+- 虚频错误：若优化后出现多个虚频或虚频振动模式不对应C-H活化，先用 IRC 确认反应路径，必要时沿主要虚频方向微调几何。
+- 收敛困难：切换优化坐标类型（Z-matrix vs. Cartesian），或先用 `opt=loose` 再收紧。
+- 自旋污染：检查 `<S**2>` 偏差，必要时使用 Spin-Restricted Open-Shell Kohn-Sham 方法 (ROKS)。
+
+---
+

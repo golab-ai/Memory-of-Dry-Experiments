@@ -396,3 +396,15 @@ dft_optimization: 使用Gaussian进行过渡态优化，关键参数：opt(ts,ca
 
 ---
 
+## 📝 2026-07-08 15:26:37
+
+**原始Prompt**: 基于 TS2.xyz、TS5.xyz、TS8.xyz，分析C-H键活化过程中的可能过渡态构型，并进行DFT优化。
+
+**Pipeline类型**: mechanism_discovery
+
+- 使用ORCA/ Gaussian进行DFT优化，关键词包含 `OptTS Freq`，并建议 `calcfc` 以提高初始力常数精度。
+- 结合 `xtb` 或 `crest` 快速预检几何合理性，再转入DFT计算。
+- 利用 `ase` 或 `cclib` 解析xyz文件并生成输入文件。
+
+---
+
