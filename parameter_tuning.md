@@ -378,3 +378,28 @@ Training with 30 epochs balanced convergence and overfitting for multi-property 
 
 ---
 
+## 📝 2026-07-08 17:00:57
+
+**原始Prompt**: 湿实验结果被存储在/mnt/nas/opencode_data_2/runjob/experiment_results中，请分析样本一和样本二在所有实验上的结果，配置文件也在相同目录中，最终给出总体对比结果。
+
+**Pipeline类型**: lab_analysis
+
+- 自动批次模式（batch）无需逐实验调用，一次性处理所有匹配的实验
+- 样本标识建议使用中文原名，由工具内部进行索引匹配
+- 配置文件与数据同目录可减少路径配置歧义
+
+---
+
+## 📝 2026-07-08 17:03:23
+
+**原始Prompt**: 为D反应推荐膦配体，用历史数据与新的湿实验数据训练产率模型并筛选 top unseen ligands，同时生成推荐配体的分子图。
+
+**Pipeline类型**: reaction_optimization
+
+• 产率模型：n_estimators=100-200，max_depth=3-5，learning_rate=0.05-0.1 防止小数据过拟合。
+• 指纹参数：radius=2，nBits=2048 平衡区分度与稀疏性。
+• 筛选 top-k：建议 k=5-10，过大可能引入低产率候选，过小则探索不足。
+• 若数据量 < 50 条，建议使用留一法交叉验证，避免过拟合误判。
+
+---
+

@@ -408,3 +408,34 @@ dft_optimization: 使用Gaussian进行过渡态优化，关键参数：opt(ts,ca
 
 ---
 
+## 📝 2026-07-08 17:00:57
+
+**原始Prompt**: 湿实验结果被存储在/mnt/nas/opencode_data_2/runjob/experiment_results中，请分析样本一和样本二在所有实验上的结果，配置文件也在相同目录中，最终给出总体对比结果。
+
+**Pipeline类型**: lab_analysis
+
+- lab_plan: 解析用户意图，提取目录、样本及配置需求
+- experiment_download: 从 /mnt/nas/opencode_data_2/runjob/experiment_results 加载原始数据与配置文件
+- file_match: 自动关联样本名与实验、配置文件
+- lcms_execute: 批量执行 LC-MS 分析，关键参数：
+  • data_dir: 实验数据目录
+  • config_dir: 同目录下的配置文件
+  • sample_ids: ["样本一", "样本二"]
+  • mode: batch
+  • 实验自动识别（未在上下文中显式指定数量，由匹配阶段发现 8 个实验）
+
+---
+
+## 📝 2026-07-08 17:03:23
+
+**原始Prompt**: 为D反应推荐膦配体，用历史数据与新的湿实验数据训练产率模型并筛选 top unseen ligands，同时生成推荐配体的分子图。
+
+**Pipeline类型**: reaction_optimization
+
+• 产率建模：使用 scikit-learn 的 GradientBoostingRegressor 或 RandomForestRegressor，配合化学指纹（Morgan 半径2，2048位）与反应条件编码。
+• 候选筛选：对 unseen 配体库生成指纹，用模型预测产率，按预测值降序取 top-k（k=10）。
+• 分子图生成：RDKit 的 Draw.MolsToGridImage，突出推荐配体的结构与预测产率。
+成功用法：统一历史与湿实验数据的特征工程，确保描述符一致性；使用交叉验证评估模型泛化能力。
+
+---
+

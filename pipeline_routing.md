@@ -347,3 +347,23 @@ Prompt specifies multi-property data training (30 epochs) and virtual screening 
 
 ---
 
+## 📝 2026-07-08 17:00:57
+
+**原始Prompt**: 湿实验结果被存储在/mnt/nas/opencode_data_2/runjob/experiment_results中，请分析样本一和样本二在所有实验上的结果，配置文件也在相同目录中，最终给出总体对比结果。
+
+**Pipeline类型**: lab_analysis
+
+当用户要求分析指定目录下的湿实验结果，涉及多个样本（如样本一、样本二）在所有实验上的数据，并提供配置文件进行对比时，路由至 lab_analysis pipeline。关键特征：多样本对比、实验数据目录、配置文件路径、需要总体对比结果。
+
+---
+
+## 📝 2026-07-08 17:03:23
+
+**原始Prompt**: 为D反应推荐膦配体，用历史数据与新的湿实验数据训练产率模型并筛选 top unseen ligands，同时生成推荐配体的分子图。
+
+**Pipeline类型**: reaction_optimization
+
+用户请求涉及反应优化（为D反应推荐膦配体）、基于历史与湿实验数据训练产率模型、筛选 top unseen ligands 并生成分子图。这些特征明确指向 reaction_optimization pipeline：需进行配体虚拟筛选、产率预测建模与可视化。关键路由信号：配体/催化剂推荐、数据驱动候选排序、unseen 化合物评估。
+
+---
+
