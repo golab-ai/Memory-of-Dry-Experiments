@@ -417,3 +417,13 @@ Prompt specifies multi-property data training (30 epochs) and virtual screening 
 
 ---
 
+## 📝 2026-07-09 02:14:01
+
+**原始Prompt**: 以 demo1.xyz 为初始结构，生成硼烷体系的可能过渡态构型。无需进行DFT优化。
+
+**Pipeline类型**: mechanism_discovery
+
+用户要求从给定初始结构生成可能的过渡态构型，无需DFT优化，属于机理发现前置步骤。关键特征：明确提供初始结构文件（如 demo1.xyz）、生成“过渡态”而非优化、无需电子结构计算 → 路由到 mechanism_discovery 管道的 ts_generation 阶段。
+
+---
+

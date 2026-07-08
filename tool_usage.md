@@ -495,3 +495,15 @@ ts_generation: RDKit生成构象 + xTB预优化 → 生成初始TS猜测。dft_o
 
 ---
 
+## 📝 2026-07-09 02:14:01
+
+**原始Prompt**: 以 demo1.xyz 为初始结构，生成硼烷体系的可能过渡态构型。无需进行DFT优化。
+
+**Pipeline类型**: mechanism_discovery
+
+- **结构读取**：使用 ASE 或内部 IO 模块读取 xyz 文件，获取原子坐标与元素。
+- **过渡态猜测**：调用基于分子图匹配或启发式规则的 TS 猜测工具（如 AutoTS、HeuristicsTS），参数设置：初始结构文件，bond change 列表（可能自动检测），方法='heuristic', max_ts=5。
+- **结果输出**：将生成的 TS 结构逐一保存为 xyz 格式，无需调用 DFT 优化工具。
+
+---
+

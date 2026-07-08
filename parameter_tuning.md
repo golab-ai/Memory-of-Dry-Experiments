@@ -459,3 +459,16 @@ Training with 30 epochs balanced convergence and overfitting for multi-property 
 
 ---
 
+## 📝 2026-07-09 02:14:01
+
+**原始Prompt**: 以 demo1.xyz 为初始结构，生成硼烷体系的可能过渡态构型。无需进行DFT优化。
+
+**Pipeline类型**: mechanism_discovery
+
+- TS 猜测方法选择'heuristic'模式，避免耗时的电子结构计算。
+- 分子图匹配阈值：原子距离容差 = 1.2 Å，键级变化数 ≤ 3。
+- 生成构型数量控制：max_structures=10，确保覆盖主要反应通道。
+- 由于不做 DFT 优化，跳过任何收敛或力场参数设置。
+
+---
+
