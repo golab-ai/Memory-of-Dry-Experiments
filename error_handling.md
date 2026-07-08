@@ -232,3 +232,13 @@ SCF不收敛：使用scf=xqc或调整积分格点（Int=UltraFine）；
 
 ---
 
+## 📝 2026-07-09 01:29:54
+
+**原始Prompt**: 为腈亚胺与烯烃的1,3-偶极环加成反应枚举可能的过渡态构型，并进行DFT优化。
+
+**Pipeline类型**: mechanism_discovery
+
+过渡态优化坍缩至中间体：调整初始结构，或使用modredundant冻结关键键长；虚频缺失/多个虚频：检查初猜是否接近鞍点，可先进行relaxed scan获取初猜；收敛失败：切换积分网格(int=ultrafine)或使用scf=qc。
+
+---
+

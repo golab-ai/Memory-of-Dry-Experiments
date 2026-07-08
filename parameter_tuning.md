@@ -424,3 +424,38 @@ Training with 30 epochs balanced convergence and overfitting for multi-property 
 
 ---
 
+## 📝 2026-07-09 01:29:54
+
+**原始Prompt**: 为腈亚胺与烯烃的1,3-偶极环加成反应枚举可能的过渡态构型，并进行DFT优化。
+
+**Pipeline类型**: mechanism_discovery
+
+构象生成能量窗口≤5 kcal/mol，RMSD去重阈值0.3 Å；TS优化默认使用calcfc精确计算初始Hessian；SCF收敛困难时加scf=xqc；虚频检查标准：唯一虚频且振动模式沿反应坐标，否则使用IRC验证或iopt=recalc重新优化。
+
+---
+
+## 📝 2026-07-09 01:40:06
+
+**原始Prompt**: 为不对称硫醇加成反应推荐最优催化剂和反应条件，并基于已有实验数据 NS_acetal_dataset_with_pdt.csv进行主动学习优化，输出下一轮优先实验建议。
+
+**Pipeline类型**: reaction_optimization
+
+- 采集函数选择：期望改进（EI）能平衡探索与利用，适用于初始数据量较少的情况。
+- 候选空间设定：根据化学知识限定催化剂种类、配体、温度范围（如-20~40℃）、溶剂等，避免无意义建议。
+- 建议轮次：每轮建议3-5个实验点，在迭代中逐步聚焦高性能区域。
+- 初始数据集分析后，建议使用标准化/归一化处理数值特征，以提升模型收敛。
+
+---
+
+## 📝 2026-07-09 01:52:48
+
+**原始Prompt**: 针对芳基底物范围数据进行配体推荐，优化electrophile、nucleophile和ligand的组合，筛选高产率候选实验，基于实验数据aryl-scope-ligand.csv 进行迭代优化。
+
+**Pipeline类型**: reaction_optimization
+
+- 优化算法：贝叶斯优化，采集函数为EI，初始随机采样10组
+- 每轮迭代推荐3个候选组合，总迭代次数根据数据规模自适应（默认5轮）
+- 产率阈值：筛选>70%高产率组合，平衡探索（低产率区域少量采样）
+
+---
+

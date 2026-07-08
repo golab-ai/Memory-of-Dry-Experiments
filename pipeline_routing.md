@@ -387,3 +387,33 @@ Prompt specifies multi-property data training (30 epochs) and virtual screening 
 
 ---
 
+## 📝 2026-07-09 01:29:54
+
+**原始Prompt**: 为腈亚胺与烯烃的1,3-偶极环加成反应枚举可能的过渡态构型，并进行DFT优化。
+
+**Pipeline类型**: mechanism_discovery
+
+用户prompt要求枚举1,3-偶极环加成反应的过渡态构型并进行DFT优化，明确目标为机理发现中的过渡态搜索与验证，触发mechanism_discovery流水线。关键特征：反应类型指定、过渡态枚举、DFT计算。
+
+---
+
+## 📝 2026-07-09 01:40:06
+
+**原始Prompt**: 为不对称硫醇加成反应推荐最优催化剂和反应条件，并基于已有实验数据 NS_acetal_dataset_with_pdt.csv进行主动学习优化，输出下一轮优先实验建议。
+
+**Pipeline类型**: reaction_optimization
+
+当用户请求包含以下特征时路由至 reaction_optimization pipeline：(1) 明确要求为特定反应推荐最优催化剂和反应条件；(2) 需要基于现有实验数据集（如CSV文件）进行数据驱动优化；(3) 涉及主动学习、下一轮实验设计或Bayesian优化等关键词；(4) 目标为收率、对映选择性等指标。典型prompt示例：'为不对称硫醇加成反应推荐最优催化剂和反应条件，并基于已有实验数据进行主动学习优化，输出下一轮优先实验建议'。
+
+---
+
+## 📝 2026-07-09 01:52:48
+
+**原始Prompt**: 针对芳基底物范围数据进行配体推荐，优化electrophile、nucleophile和ligand的组合，筛选高产率候选实验，基于实验数据aryl-scope-ligand.csv 进行迭代优化。
+
+**Pipeline类型**: reaction_optimization
+
+当用户输入涉及配体推荐、底物范围优化、高产率候选筛选，且提供实验数据文件（如CSV）进行迭代优化时，路由到 reaction_optimization pipeline。关键特征：组合优化、数据驱动、配体/底物/亲电试剂/亲核试剂多变量协同提升产率。
+
+---
+

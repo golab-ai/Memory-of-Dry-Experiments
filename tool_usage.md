@@ -461,3 +461,37 @@ dft_optimization: 使用Gaussian进行过渡态优化，关键参数：opt(ts,ca
 
 ---
 
+## 📝 2026-07-09 01:29:54
+
+**原始Prompt**: 为腈亚胺与烯烃的1,3-偶极环加成反应枚举可能的过渡态构型，并进行DFT优化。
+
+**Pipeline类型**: mechanism_discovery
+
+ts_generation: RDKit生成构象 + xTB预优化 → 生成初始TS猜测。dft_optimization: Gaussian 16 (opt=ts freq) 或 ORCA 进行结构优化和频率计算。关键参数：DFT方法建议B3LYP-D3(BJ)/6-31+G(d)；xTB用GFN2-xTB快速预优化。
+
+---
+
+## 📝 2026-07-09 01:40:06
+
+**原始Prompt**: 为不对称硫醇加成反应推荐最优催化剂和反应条件，并基于已有实验数据 NS_acetal_dataset_with_pdt.csv进行主动学习优化，输出下一轮优先实验建议。
+
+**Pipeline类型**: reaction_optimization
+
+- Bayesian优化工具（如BoTorch/Ax）：用于主动学习建议，关键参数包括目标变量（yield, ee）、采集函数（Expected Improvement）、候选空间（催化剂、溶剂、温度等）。
+- 数据加载/预处理：读取NS_acetal_dataset_with_pdt.csv，提取特征和目标列，处理缺失值。
+- 多目标优化（若同时优化收率和ee）：使用采集函数的加权组合或约束优化。
+
+---
+
+## 📝 2026-07-09 01:52:48
+
+**原始Prompt**: 针对芳基底物范围数据进行配体推荐，优化electrophile、nucleophile和ligand的组合，筛选高产率候选实验，基于实验数据aryl-scope-ligand.csv 进行迭代优化。
+
+**Pipeline类型**: reaction_optimization
+
+- 使用 ligand_recommendation 工具：指定底物范围数据文件（aryl-scope-ligand.csv），目标变量为产率，优化模式为组合推荐
+- 利用数据加载工具自动解析CSV，提取特征列（electrophile, nucleophile, ligand）
+- 结果输出工具生成候选实验列表，按预测产率排序
+
+---
+
