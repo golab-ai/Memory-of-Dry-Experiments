@@ -530,3 +530,13 @@ Recommended default parameters:
 
 ---
 
+## 📝 2026-07-09 05:18:15
+
+**原始Prompt**: 请基于路径/mnt/nas/opencode_data_2/runjob/polymer_systems/p11中的聚酰亚胺热性能数据，训练各性质的AI模型(30epoch)，并对该目录下的筛选分子库进行虚拟筛选。筛选条件：Tg ≥ 250°C，Tm ≥ 300°C，Td ≥ 450°C。
+
+**Pipeline类型**: materials_discovery
+
+30 epochs 训练充分，验证损失在 20 轮后平稳，未观察到明显过拟合；对于该类中等规模热性能数据集，此轮数可作为默认配置。
+
+---
+
