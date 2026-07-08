@@ -403,3 +403,14 @@ Training with 30 epochs balanced convergence and overfitting for multi-property 
 
 ---
 
+## 📝 2026-07-08 21:11:54
+
+**原始Prompt**: 请基于路径 /mnt/nas/opencode_data_2/runjob/polymer_systems/p06中的可回收高分子材料多性质数据，训练预测模型(30个epoch)并对分子库进行虚拟筛选。筛选条件：Tg在100°C到200°C之间，Tm在200°C到250°C之间，Td在250°C到300°C之间，E ≥1GPa，开环焓的范围是-20到-10 kJ/mol。
+
+**Pipeline类型**: materials_discovery
+
+- 训练周期：30 epoch在中小规模材料数据集上通常可实现良好收敛且不易过拟合，可作为基准值。
+- 批量筛选：一次性传入所有物性约束，避免多次过滤造成性能损耗；数值区间需注意单位与数据列的一致性（如E单位GPa）。
+
+---
+

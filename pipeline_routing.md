@@ -367,3 +367,13 @@ Prompt specifies multi-property data training (30 epochs) and virtual screening 
 
 ---
 
+## 📝 2026-07-08 21:11:54
+
+**原始Prompt**: 请基于路径 /mnt/nas/opencode_data_2/runjob/polymer_systems/p06中的可回收高分子材料多性质数据，训练预测模型(30个epoch)并对分子库进行虚拟筛选。筛选条件：Tg在100°C到200°C之间，Tm在200°C到250°C之间，Td在250°C到300°C之间，E ≥1GPa，开环焓的范围是-20到-10 kJ/mol。
+
+**Pipeline类型**: materials_discovery
+
+当用户prompt包含材料性质数据路径、明确要求训练预测模型并基于多性质范围进行虚拟筛选（如Tg、Tm、Td、E、开环焓等）时，路由至materials_discovery pipeline的ai_screening阶段。关键特征：指定数据路径、定义训练周期（如30 epoch）、多目标物性约束条件。
+
+---
+
