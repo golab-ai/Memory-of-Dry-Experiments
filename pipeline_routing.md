@@ -427,3 +427,23 @@ Prompt specifies multi-property data training (30 epochs) and virtual screening 
 
 ---
 
+## 📝 2026-07-09 03:26:27
+
+**原始Prompt**: 计算这个电解液分子NC1OCCCO1的热力学性质，包括焓、熵、自由能。
+
+**Pipeline类型**: qm_thermo
+
+用户请求明确包含热力学性质（焓、熵、自由能）及分子标识（SMILES: NC1OCCCO1），直接触发 qm_thermo pipeline。关键路由特征：thermochemistry keywords + chemical structure input, no need for complex conversational branching.
+
+---
+
+## 📝 2026-07-09 03:35:44
+
+**原始Prompt**: 计算这个反应的液相自由能：2CO2+6H2->C_H_OH+3H2O
+
+**Pipeline类型**: qm_thermo
+
+用户要求计算液相反应自由能（含明确反应式），触发热力学性质计算需求。路由至qm_thermo管道，因其专门处理反应热力学量（ΔG、ΔH等）的计算，支持指定溶剂环境。
+
+---
+

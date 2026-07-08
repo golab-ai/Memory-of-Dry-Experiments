@@ -472,3 +472,26 @@ Training with 30 epochs balanced convergence and overfitting for multi-property 
 
 ---
 
+## 📝 2026-07-09 03:26:27
+
+**原始Prompt**: 计算这个电解液分子NC1OCCCO1的热力学性质，包括焓、熵、自由能。
+
+**Pipeline类型**: qm_thermo
+
+- DFT方法: B3LYP-D3(BJ)/def2-SVP，平衡精度和成本
+- 温度/压力: 298.15 K, 1 atm
+- 频率校正因子: 0.960（适用于B3LYP/6-31G*，def2-SVP可比照）
+- 构象搜索能量窗口 5-10 kcal/mol，确保全局最小值
+
+---
+
+## 📝 2026-07-09 03:35:44
+
+**原始Prompt**: 计算这个反应的液相自由能：2CO2+6H2->C_H_OH+3H2O
+
+**Pipeline类型**: qm_thermo
+
+推荐理论水平：B3LYP-D3(BJ)/def2-SVP(opt+freq) + M06-2X/def2-TZVP(solvation sp)；液相自由能需在气相热力学校正基础上加上溶解自由能（ΔG_solv），注意标准态转换（1 atm→1 mol/L）若必要。温度默认298.15 K。
+
+---
+

@@ -507,3 +507,27 @@ ts_generation: RDKit生成构象 + xTB预优化 → 生成初始TS猜测。dft_o
 
 ---
 
+## 📝 2026-07-09 03:26:27
+
+**原始Prompt**: 计算这个电解液分子NC1OCCCO1的热力学性质，包括焓、熵、自由能。
+
+**Pipeline类型**: qm_thermo
+
+- rdkit/smiles_to_3d: 生成初始3D构象
+- xtb/opt: GFN2-xTB 快速预优化
+- crest: 构象搜索（能量窗口 6 kcal/mol）
+- orca/freq: B3LYP-D3(BJ)/def2-SVP 优化+频率计算，输出热力学量
+- 解析频率结果得到焓、熵、自由能
+
+---
+
+## 📝 2026-07-09 03:35:44
+
+**原始Prompt**: 计算这个反应的液相自由能：2CO2+6H2->C_H_OH+3H2O
+
+**Pipeline类型**: qm_thermo
+
+使用量子化学程序（如Gaussian/ORCA）进行结构优化、频率计算和溶剂化单点能。关键工具：geom_opt → freq → solvation_sp。溶剂模型选用SMD，溶剂关键词为水（或指定溶剂），在频率计算后读取热力学校正量，结合溶剂化能获得液相自由能。
+
+---
+
