@@ -414,3 +414,13 @@ Training with 30 epochs balanced convergence and overfitting for multi-property 
 
 ---
 
+## 📝 2026-07-08 22:27:11
+
+**原始Prompt**: 请基于路径/mnt/nas/opencode_data_2/runjob/polymer_systems/p15中的玻璃态高分子力学性能数据，训练AI模型(30epoch)并对分子库进行虚拟筛选。筛选条件：E > 3 GPa。
+
+**Pipeline类型**: materials_discovery
+
+用户指定 30 个训练周期，对于力学性能数据集通常足够收敛。建议配合早停机制和验证集监控避免过拟合。若数据量小于 500 条，可尝试增加 epoch 至 50 并降低学习率。
+
+---
+
