@@ -495,3 +495,38 @@ Training with 30 epochs balanced convergence and overfitting for multi-property 
 
 ---
 
+## 📝 2026-07-09 04:26:23
+
+**原始Prompt**: 计算以下几个分子的电化学窗口：COC(=O)OCC(F)(F)FO=C1OC=CO1、C1=CC=C(OC2=CC=CC=C2)C=C1
+
+**Pipeline类型**: qm_thermo
+
+• 基组需包含弥散函数(如6-31+G(d,p))以准确描述阴离子  • 建议使用长程校正泛函(ωB97XD)减少离域误差  • 溶剂设为水/乙腈(ε=78.4/37.5)  • 对柔性分子先做RDKit构象搜素。
+
+---
+
+## 📝 2026-07-09 04:33:47
+
+**原始Prompt**: 计算这个反应的气相自由能：CO2+3H2 -> CH3OH+H2O
+
+**Pipeline类型**: qm_thermo
+
+Recommended default parameters: 
+- Method/Basis: B3LYP/6-31G(d) for small organic molecules. 
+- Temperature: 298.15 K, Pressure: 1 atm. 
+- Integration grid: Fine (or Ultrafine) for improved numerical stability. 
+- Tight convergence criteria for geometry optimization. 
+- Verify all optimized structures have no imaginary frequencies (minima).
+
+---
+
+## 📝 2026-07-09 04:42:33
+
+**原始Prompt**: 计算Si体系的声子谱计算(supercell 4x4x4, delta 0.01)
+
+**Pipeline类型**: phonon_spectrum
+
+对于Si体系，4×4×4超胞已足够收敛，兼顾精度与计算成本。位移0.01 Å是平衡数值噪声与谐波近似有效性的推荐值；更小位移可能受数值误差影响，更大位移可能引入非谐效应。
+
+---
+

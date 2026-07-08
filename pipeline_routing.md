@@ -447,3 +447,33 @@ Prompt specifies multi-property data training (30 epochs) and virtual screening 
 
 ---
 
+## 📝 2026-07-09 04:26:23
+
+**原始Prompt**: 计算以下几个分子的电化学窗口：COC(=O)OCC(F)(F)FO=C1OC=CO1、C1=CC=C(OC2=CC=CC=C2)C=C1
+
+**Pipeline类型**: qm_thermo
+
+多分子SMILES列表，要求计算电化学窗口、氧化还原电位等热力学性质 → 应路由到 qm_thermo pipeline：需进行分子结构准备、构象搜索、DFT优化/单点能、溶剂化模型计算。
+
+---
+
+## 📝 2026-07-09 04:33:47
+
+**原始Prompt**: 计算这个反应的气相自由能：CO2+3H2 -> CH3OH+H2O
+
+**Pipeline类型**: qm_thermo
+
+For prompts containing an explicit chemical reaction equation (e.g., CO2 + 3H2 -> CH3OH + H2O) and a request for gas-phase free energy, route to qm_thermo pipeline. This involves stoichiometric balancing detection and extraction of individual species. Simple small-molecule reactions with ≤5 species and gas-phase conditions are best served by this pipeline.
+
+---
+
+## 📝 2026-07-09 04:42:33
+
+**原始Prompt**: 计算Si体系的声子谱计算(supercell 4x4x4, delta 0.01)
+
+**Pipeline类型**: phonon_spectrum
+
+当用户请求包含“声子谱”、“phonon spectrum”且给出supercell大小（如4x4x4）与位移幅度（如delta）时，直接路由到phonon_spectrum pipeline。关键特征词：声子、phonon、supercell、delta。
+
+---
+

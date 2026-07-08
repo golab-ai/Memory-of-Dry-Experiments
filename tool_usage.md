@@ -531,3 +531,37 @@ ts_generation: RDKit生成构象 + xTB预优化 → 生成初始TS猜测。dft_o
 
 ---
 
+## 📝 2026-07-09 04:26:23
+
+**原始Prompt**: 计算以下几个分子的电化学窗口：COC(=O)OCC(F)(F)FO=C1OC=CO1、C1=CC=C(OC2=CC=CC=C2)C=C1
+
+**Pipeline类型**: qm_thermo
+
+• RDKit/Open Babel: SMILES→3D结构  • xTB: 预优化  • Gaussian 16: DFT (B3LYP/6-31+G(d,p) opt freq) + SMD溶剂模型  • 计算中性、阳离子、阴离子能量，获取垂直电离能/电子亲和能。
+
+---
+
+## 📝 2026-07-09 04:33:47
+
+**原始Prompt**: 计算这个反应的气相自由能：CO2+3H2 -> CH3OH+H2O
+
+**Pipeline类型**: qm_thermo
+
+Quantum chemistry package (e.g., Gaussian) used in qm_execute: 
+- Geometry optimization and frequency calculation for each reactant and product with `opt freq` keywords.
+- Extract Gibbs free energy (thermal correction to Gibbs free energy) from output. 
+- Compute reaction free energy: ΔG = ΣG_products - ΣG_reactants. 
+- Ensure consistent level of theory for all species.
+
+---
+
+## 📝 2026-07-09 04:42:33
+
+**原始Prompt**: 计算Si体系的声子谱计算(supercell 4x4x4, delta 0.01)
+
+**Pipeline类型**: phonon_spectrum
+
+使用有限位移法计算声子：调用phonopy生成超胞，设置位移为0.01 Å。通过vasp或DFT引擎计算受力，再后处理得到声子色散。关键参数：--dim="4 4 4" --amplitude=0.01
+
+---
+
