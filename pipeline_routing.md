@@ -487,3 +487,13 @@ For prompts containing an explicit chemical reaction equation (e.g., CO2 + 3H2 -
 
 ---
 
+## 📝 2026-07-09 17:00:57
+
+**原始Prompt**: 请基于路径/mnt/nas/opencode_data_2/runjob/polymer_systems/p12中的聚酰亚胺气体渗透性数据，训练AI模型(30epoch)并对分子库进行虚拟筛选。筛选条件：O2 ≥ 5 Barrer，N2渗透率最低的前50个，CO2 ≥ 50 Barrer，CH4渗透率最低的前50个，H2 ≥ 100 Barrer。
+
+**Pipeline类型**: materials_discovery
+
+用户prompt若同时包含材料数据路径、AI模型训练要求和基于多重性能指标的虚拟筛选，应路由至materials_discovery pipeline，该pipeline支持数据加载、模型训练和条件筛选的端到端任务。
+
+---
+

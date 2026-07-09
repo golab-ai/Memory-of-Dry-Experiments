@@ -576,3 +576,15 @@ Quantum chemistry package (e.g., Gaussian) used in qm_execute:
 
 ---
 
+## 📝 2026-07-09 17:00:57
+
+**原始Prompt**: 请基于路径/mnt/nas/opencode_data_2/runjob/polymer_systems/p12中的聚酰亚胺气体渗透性数据，训练AI模型(30epoch)并对分子库进行虚拟筛选。筛选条件：O2 ≥ 5 Barrer，N2渗透率最低的前50个，CO2 ≥ 50 Barrer，CH4渗透率最低的前50个，H2 ≥ 100 Barrer。
+
+**Pipeline类型**: materials_discovery
+
+- 使用深度学习/机器学习框架进行回归模型训练（如PyTorch/TensorFlow/scikit-learn）
+- 需调用自定义数据加载函数读取指定路径下的聚酰亚胺数据集
+- 模型预测后调用排序与筛选模块：先按阈值过滤（O2≥5, CO2≥50, H2≥100），再对N2和CH4渗透率分别升序取前50
+
+---
+

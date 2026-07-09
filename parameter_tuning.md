@@ -540,3 +540,14 @@ Recommended default parameters:
 
 ---
 
+## 📝 2026-07-09 17:00:57
+
+**原始Prompt**: 请基于路径/mnt/nas/opencode_data_2/runjob/polymer_systems/p12中的聚酰亚胺气体渗透性数据，训练AI模型(30epoch)并对分子库进行虚拟筛选。筛选条件：O2 ≥ 5 Barrer，N2渗透率最低的前50个，CO2 ≥ 50 Barrer，CH4渗透率最低的前50个，H2 ≥ 100 Barrer。
+
+**Pipeline类型**: materials_discovery
+
+- epoch=30，需监控训练/验证损失避免过拟合
+- 筛选逻辑优化：先全局过滤满足关键气体阈值的分子，再针对N2和CH4分别排序，取各自最低的前50（总计最多100个分子），避免在大量数据上做全量排序
+
+---
+
