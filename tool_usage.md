@@ -634,3 +634,131 @@ Quantum chemistry package (e.g., Gaussian) used in qm_execute:
 
 ---
 
+## 📝 2026-07-10 17:18:41
+
+**原始Prompt**: 第一轮实验和第二轮实验结果记录在分析目录中，请帮我对产率进行分析
+
+**Pipeline类型**: lab_analysis
+
+- experiment_download: 下载指定轮次实验数据
+- file_match: 匹配分析目录下的数据文件
+- lcms_execute: 执行LCMS分析获取产率
+- yield_comparison: 进行两轮产率对比，输出对比表格
+
+---
+
+## 📝 2026-07-10 17:31:17
+
+**原始Prompt**: 第一轮实验和第二轮实验结果记录在分析目录中，请帮我对产率进行分析
+
+**Pipeline类型**: lab_analysis
+
+• experiment_download: 需指定实验ID或批次，自动下载原始数据
+• file_match: 将两轮实验的文件按组分对齐
+• lcms_execute: 对每轮数据执行LC-MS分析，提取产率
+• yield_comparison: 输入为两组产率结果，输出对比表；若未设置产物列表参数可能导致结果为空
+
+---
+
+## 📝 2026-07-10 17:34:29
+
+**原始Prompt**: 第二轮湿实验优化的结果被存储在/mnt/nas/opencode_data_2/runjob/experiment_results_round2中，请分析样本二在新实验上的结果，配置文件也在相同目录中，最终给出总体对比结果。
+
+**Pipeline类型**: lab_analysis
+
+experiment_download: 从NAS路径下载实验数据，参数需提供准确的目录路径。file_match: 按样本名匹配配置文件与结果文件，依赖目录结构规范性。lcms_execute: 调用LCMS解析，需指定配置文件。yield_comparison: 执行多轮产率对比，输出0/0成功可能代表无可用对比项，需检查数据完整性。
+
+---
+
+## 📝 2026-07-10 17:35:13
+
+**原始Prompt**: 第二轮湿实验优化的结果被存储在/mnt/nas/opencode_data_2/runjob/experiment_results_round2中，请分析样本二在新实验上的结果，配置文件也在相同目录中，最终给出总体对比结果。
+
+**Pipeline类型**: lab_analysis
+
+experiment_download: 从指定路径下载实验数据。
+file_match: 匹配下载数据与同目录下的配置文件。
+lcms_execute: 执行LCMS分析，输入为匹配后的文件。
+yield_comparison: 进行产率对比，自动处理样本跨轮次比较。
+成功用法：严格按lab_plan→experiment_download→file_match→lcms_execute→yield_comparison顺序执行。
+
+---
+
+## 📝 2026-07-10 17:38:46
+
+**原始Prompt**: 第二轮湿实验优化的结果被存储在/mnt/nas/opencode_data_2/runjob/experiment_results_round2中，请分析样本二在新实验上的结果，配置文件也在相同目录中，最终给出总体对比结果。
+
+**Pipeline类型**: lab_analysis
+
+experiment_download: 从/mnt/nas/opencode_data_2/runjob/experiment_results_round2下载数据；file_match: 自动识别并关联配置文件与数据文件；lcms_execute: 运行LC-MS分析任务；yield_comparison: 针对样本二生成新旧实验结果对比。
+
+---
+
+## 📝 2026-07-10 17:40:11
+
+**原始Prompt**: 第二轮湿实验优化的结果被存储在/mnt/nas/opencode_data_2/runjob/experiment_results_round2中，请分析样本二在新实验上的结果，配置文件也在相同目录中。
+
+**Pipeline类型**: lab_analysis
+
+experiment_download: 根据配置文件从指定目录下载原始数据；
+file_match: 将用户指定的样本名（如“样本二”）与目录内文件名自动匹配；
+lcms_execute: 执行液相色谱-质谱分析，参数源自配置文件；
+yield_comparison: 对比多轮实验的产量数据。
+均以batch模式运行，输入为样本列表。
+
+---
+
+## 📝 2026-07-10 17:41:41
+
+**原始Prompt**: 第一轮实验和第二轮实验结果记录在分析目录中，请帮我对产率进行分析
+
+**Pipeline类型**: lab_analysis
+
+流程：experiment_download（获取实验数据）→ file_match（匹配产率相关文件）→ lcms_execute（执行LCMS分析）→ yield_comparison（对比产率）。需要确保各工具输入/输出路径一致，并使用正确的文件匹配模式（如包含 Yield 或 purity 的关键词）。
+
+---
+
+## 📝 2026-07-10 17:43:32
+
+**原始Prompt**: 第一轮实验和第二轮实验结果记录在分析目录中，请帮我对产率进行分析
+
+**Pipeline类型**: lab_analysis
+
+lcms_execute工具用于执行LCMS数据处理脚本，需正确指定输入文件路径与输出目录。yield_comparison工具接收两组实验的产率结果文件路径，自动计算差异并生成对比报告。关键参数：--exp1和--exp2分别指定第一轮、第二轮结果文件路径。如果路径不正确，会导致0/0成功无结果。
+
+---
+
+## 📝 2026-07-10 17:46:22
+
+**原始Prompt**: 第一轮实验和第二轮实验结果记录在分析目录中，请帮我对产率进行分析
+
+**Pipeline类型**: lab_analysis
+
+- yield_comparator: 必须指定 --data-dir 为分析目录路径，--rounds 传入轮次列表（如 '1,2'）；
+- experiment_download: 先下载实验数据以确保目标文件存在，避免文件匹配失败。
+
+---
+
+## 📝 2026-07-10 17:47:33
+
+**原始Prompt**: 第一轮实验和第二轮实验结果记录在分析目录中，请帮我对产率进行分析
+
+**Pipeline类型**: lab_analysis
+
+yield_comparison: 用于比较两轮实验的产率。当前使用场景是已下载的实验文件，匹配后执行产率比较，返回成功/失败计数。无额外参数配置。
+
+---
+
+## 📝 2026-07-10 17:48:18
+
+**原始Prompt**: 第二轮湿实验优化的结果被存储在/mnt/nas/opencode_data_2/runjob/experiment_results_round2中，请分析样本二在新实验上的结果，配置文件也在相同目录中。
+
+**Pipeline类型**: lab_analysis
+
+- lcms_execute: 对指定样本的LCMS数据进行分析，需传入实验数据目录和配置文件路径。
+- file_match: 自动匹配目录中的配置文件与数据文件。
+- yield_comparison: 对比不同轮次或样本的产率结果（本次实验数为0，仅做单样本分析）。
+- experiment_download: 若数据需从远程获取，先下载数据。
+
+---
+
