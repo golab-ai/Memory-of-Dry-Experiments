@@ -572,3 +572,13 @@ Recommended default parameters:
 
 ---
 
+## 📝 2026-07-10 13:41:10
+
+**原始Prompt**: 请基于路径/mnt/nas/opencode_data_2/runjob/polymer_systems/p14中的玻璃态高分子热性能数据，训练AI模型(50epoch)并对分子库进行虚拟筛选。筛选条件：Tg ≥ 150°C，Td ≥ 350°C。
+
+**Pipeline类型**: materials_discovery
+
+epochs=50 对本任务数据量足够收敛，无需额外调优；建议后续可监控验证损失适时采用早停防止过拟合。
+
+---
+

@@ -610,3 +610,15 @@ Quantum chemistry package (e.g., Gaussian) used in qm_execute:
 
 ---
 
+## 📝 2026-07-10 13:41:10
+
+**原始Prompt**: 请基于路径/mnt/nas/opencode_data_2/runjob/polymer_systems/p14中的玻璃态高分子热性能数据，训练AI模型(50epoch)并对分子库进行虚拟筛选。筛选条件：Tg ≥ 150°C，Td ≥ 350°C。
+
+**Pipeline类型**: materials_discovery
+
+• train_model: 输入数据路径 /mnt/nas/opencode_data_2/runjob/polymer_systems/p14，目标属性 Tg, Td，训练epochs=50
+• predict_properties: 对分子库批量预测 Tg 和 Td
+• filter_molecules: 条件 Tg ≥ 150°C 且 Td ≥ 350°C，输出通过筛选的分子列表
+
+---
+
