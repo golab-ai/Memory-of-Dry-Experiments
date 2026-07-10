@@ -527,3 +527,13 @@ For prompts containing an explicit chemical reaction equation (e.g., CO2 + 3H2 -
 
 ---
 
+## 📝 2026-07-10 14:47:22
+
+**原始Prompt**: 第二轮湿实验优化的结果被存储在/mnt/nas/opencode_data_2/runjob/experiment_results_round2中，请分析样本二在新实验上的结果，配置文件也在相同目录中，最终给出总体对比结果。
+
+**Pipeline类型**: lab_analysis
+
+When user prompt contains keywords like '实验结果分析', '样本', '对比结果', '实验数据', and specifies data path, route to lab_analysis pipeline. The prompt should indicate a need to analyze experimental results with comparison.
+
+---
+
