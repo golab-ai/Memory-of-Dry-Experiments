@@ -507,3 +507,13 @@ For prompts containing an explicit chemical reaction equation (e.g., CO2 + 3H2 -
 
 ---
 
+## 📝 2026-07-10 12:12:36
+
+**原始Prompt**: 请基于路径/mnt/nas/opencode_data_2/runjob/polymer_systems/p11中的聚酰亚胺热性能数据，训练各性质的AI模型(50epoch)，并对该目录下的筛选分子库进行虚拟筛选。筛选条件：Tg ≥ 250°C，Tm ≥ 300°C，Td ≥ 450°C。
+
+**Pipeline类型**: materials_discovery
+
+当用户要求基于材料热性能数据训练AI模型并对分子库进行虚拟筛选时，应路由到 materials_discovery 管道的 ai_screening 阶段。Prompt 特征包括：'训练...AI模型'、'虚拟筛选'、明确的材料性质阈值（Tg、Tm、Td）。
+
+---
+
