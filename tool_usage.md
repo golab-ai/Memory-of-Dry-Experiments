@@ -588,3 +588,14 @@ Quantum chemistry package (e.g., Gaussian) used in qm_execute:
 
 ---
 
+## 📝 2026-07-10 10:17:25
+
+**原始Prompt**: 请基于路径/mnt/nas/opencode_data_2/runjob/polymer_systems/p11中的聚酰亚胺热性能数据，训练各性质的AI模型(50epoch)，并对该目录下的筛选分子库进行虚拟筛选。筛选条件：Tg ≥ 250°C，Tm ≥ 300°C，Td ≥ 450°C。
+
+**Pipeline类型**: materials_discovery
+
+- 模型训练: 使用自定义多性质预测训练框架，输入分子描述符，输出Tg/Tm/Td三个回归目标，训练配置epochs=50，批次大小32，优化器Adam，损失MSE。
+- 虚拟筛选: 调用批量预测模块，对/mnt/nas/.../p11下的筛选分子库生成预测值，然后按Tg≥250, Tm≥300, Td≥450并行过滤，输出符合条件分子列表。
+
+---
+
