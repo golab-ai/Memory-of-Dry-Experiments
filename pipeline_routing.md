@@ -958,3 +958,13 @@ User prompt mentions wet-lab experiment optimization results stored in a specifi
 
 ---
 
+## 📝 2026-07-11 13:56:30
+
+**原始Prompt**: 第一轮实验和第二轮实验结果记录在分析目录中，请帮我对产率进行分析。
+
+**Pipeline类型**: lab_analysis
+
+用户询问实验产率分析并指定分析目录 → 路由至 lab_analysis pipeline，触发 yield_comparison 模式。关键词：产率分析、多轮实验、分析目录。
+
+---
+
