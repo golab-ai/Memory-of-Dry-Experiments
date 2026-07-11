@@ -807,3 +807,104 @@ User prompt mentions wet-lab experiment optimization results stored in a specifi
 
 ---
 
+## 📝 2026-07-11 11:05:01
+
+**原始Prompt**: 第一轮实验和第二轮实验结果记录在分析目录中，请帮我对产率进行分析。
+
+**Pipeline类型**: lab_analysis
+
+用户要求对比多轮实验产率，典型lab_analysis pipeline。关键词：实验记录、产率分析、多轮对比。触发yield_comparison模式。
+
+---
+
+## 📝 2026-07-11 11:05:32
+
+**原始Prompt**: 第一轮实验和第二轮实验结果记录在分析目录中，请帮我对产率进行分析。
+
+**Pipeline类型**: lab_analysis
+
+用户提示包含“产率分析”以及明确的实验轮次（第一轮、第二轮），需路由到lab_analysis pipeline。内部根据“比较”意图自动选择yield_comparison模式。关键特征：多轮实验对比 + 产率/定量分析 + 实验目录路径。
+
+---
+
+## 📝 2026-07-11 11:06:25
+
+**原始Prompt**: 第一轮实验和第二轮实验结果记录在分析目录中，请帮我对产率进行分析。
+
+**Pipeline类型**: lab_analysis
+
+用户prompt提及多轮实验（第一轮、第二轮）并对产率进行分析时，路由至 lab_analysis pipeline 的 yield_comparison 模式。关键特征词：轮次序号 + '产率'/'分析'，表明需要对比不同批次的实验产出。
+
+---
+
+## 📝 2026-07-11 11:07:05
+
+**原始Prompt**: 第一轮实验和第二轮实验结果记录在分析目录中，请帮我对产率进行分析。
+
+**Pipeline类型**: lab_analysis
+
+用户prompt中包含“实验结果”“产率分析”“第一轮和第二轮”等关键词，并指定分析目录，明确要求对比多轮实验的产率，触发lab_analysis pipeline的yield_comparison模式。路由特征：多轮实验、产率/收率对比、已存在分析目录。
+
+---
+
+## 📝 2026-07-11 11:08:24
+
+**原始Prompt**: 第一轮实验和第二轮实验结果记录在分析目录中，请帮我对产率进行分析。
+
+**Pipeline类型**: lab_analysis
+
+用户prompt要求对两轮实验进行产率分析与对比。关键词：'第一轮实验'、'第二轮实验'、'产率分析'，应路由至lab_analysis pipeline，并启用yield_comparison模式。需解析多轮实验ID，调用产率对比流程。
+
+---
+
+## 📝 2026-07-11 11:09:08
+
+**原始Prompt**: 第一轮实验和第二轮实验结果记录在分析目录中，请帮我对产率进行分析。
+
+**Pipeline类型**: lab_analysis
+
+用户请求对两轮实验结果的产率进行分析，关键词'产率分析'、'实验结果记录'、'分析目录'，路由至 lab_analysis pipeline 的 yield_comparison 模式，侧重于从已有实验数据中对比产率。
+
+---
+
+## 📝 2026-07-11 11:21:04
+
+**原始Prompt**: 第一轮实验和第二轮实验结果记录在分析目录中，请帮我对产率进行分析。
+
+**Pipeline类型**: lab_analysis
+
+- 用户询问多轮实验产率分析时，应路由至lab_analysis pipeline的yield_comparison模式
+- 关键词：第X轮实验、产率、分析、比较
+
+---
+
+## 📝 2026-07-11 11:25:41
+
+**原始Prompt**: 第一轮实验和第二轮实验结果记录在分析目录中，请帮我对产率进行分析。
+
+**Pipeline类型**: lab_analysis
+
+用户prompt包含“产率”和“分析”关键词，直接触发lab_analysis pipeline，无需复杂路由决策。当提到多轮实验对比时，选择yield_comparison模式。
+
+---
+
+## 📝 2026-07-11 11:26:14
+
+**原始Prompt**: 第一轮实验和第二轮实验结果记录在分析目录中，请帮我对产率进行分析。
+
+**Pipeline类型**: lab_analysis
+
+当用户要求对多轮实验结果进行产率对比分析时，应路由到 lab_analysis pipeline，并设置分析模式为 yield_comparison。关键特征：prompt 中含有“第一轮/第二轮”、“产率”、“分析”等词，且涉及历史实验数据。
+
+---
+
+## 📝 2026-07-11 11:31:56
+
+**原始Prompt**: 第一轮实验和第二轮实验结果记录在分析目录中，请帮我对产率进行分析。
+
+**Pipeline类型**: lab_analysis
+
+当用户prompt明确要求对多轮实验进行产率分析时，路由至 lab_analysis pipeline，并在 lab_plan 阶段指定分析模式为 yield_comparison。关键触发词包括“产率分析”、“比较产率”、“两轮实验产率”等。
+
+---
+
