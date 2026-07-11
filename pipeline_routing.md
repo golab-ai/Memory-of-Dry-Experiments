@@ -717,3 +717,93 @@ User prompt mentions wet-lab experiment optimization results stored in a specifi
 
 ---
 
+## 📝 2026-07-11 10:00:19
+
+**原始Prompt**: 第一轮实验和第二轮实验结果记录在分析目录中，请帮我对产率进行分析。
+
+**Pipeline类型**: lab_analysis
+
+当用户请求对多轮实验结果进行产率分析，并提及“分析目录”时，路由至lab_analysis pipeline，使用yield_comparison模式。关键特征：多实验对比、产率指标、已有结构化实验记录目录。
+
+---
+
+## 📝 2026-07-11 10:02:53
+
+**原始Prompt**: 第二轮湿实验优化的结果被存储在/mnt/nas/opencode_data_2/runjob/experiment_results_round2中，请分析样本二在新实验上的结果，配置文件也在相同目录中。
+
+**Pipeline类型**: lab_analysis
+
+用户要求分析指定目录(/mnt/nas/opencode_data_2/runjob/experiment_results_round2)中的实验结果，并指定样本二，配置文件也在同一目录。触发lab_analysis pipeline，执行批量分析模式(lab_plan→experiment_download→file_match→lcms_execute→yield_comparison)。
+
+---
+
+## 📝 2026-07-11 10:19:21
+
+**原始Prompt**: 第二轮湿实验优化的结果被存储在/mnt/nas/opencode_data_2/runjob/experiment_results_round2中，请分析样本二在新实验D上的结果，配置文件也在相同目录中。
+
+**Pipeline类型**: lab_analysis
+
+用户要求分析特定样本在不同实验条件下的湿实验优化结果，指定目录和配置文件，触发 lab_analysis pipeline。关键特征：提及“第二轮湿实验优化”“样本二”“新实验D”，明确数据位置，需进行 LCMS 数据解析和产量对比。
+
+---
+
+## 📝 2026-07-11 10:21:02
+
+**原始Prompt**: 第二轮湿实验优化的结果被存储在/mnt/nas/opencode_data_2/runjob/experiment_results_round2中，请分析样本二在新实验D上的结果，配置文件也在相同目录中。
+
+**Pipeline类型**: lab_analysis
+
+当用户prompt明确指出实验数据目录路径（如/mnt/nas/.../experiment_results_round2），并要求分析特定样本（“样本二”）在指定新实验（“新实验D”）上的结果，且提及配置文件在同目录时，路由到lab_analysis pipeline，采用批量模式（batch）执行完整分析流程。
+
+---
+
+## 📝 2026-07-11 10:23:30
+
+**原始Prompt**: 第二轮湿实验优化的结果被存储在/mnt/nas/opencode_data_2/runjob/experiment_results_round2中，请分析新配体在新实验D上的结果，配置文件也在相同目录中。
+
+**Pipeline类型**: lab_analysis
+
+用户请求分析第二轮湿实验优化结果，提供存储目录及配置文件，明确提到‘新配体在新实验D上的结果’——此类涉及湿实验数据（LCMS、产率比较）的任务应路由至lab_analysis pipeline。关键特征：包含实验轮次、结果目录路径、实验名称标识（如实验D）。
+
+---
+
+## 📝 2026-07-11 10:24:03
+
+**原始Prompt**: 第二轮湿实验优化的结果被存储在/mnt/nas/opencode_data_2/runjob/experiment_results_round2中，请分析新配体在新实验D上的结果，配置文件也在相同目录中。
+
+**Pipeline类型**: lab_analysis
+
+用户请求分析湿实验优化结果，并指定数据目录和特定实验标签时，应路由到 lab_analysis pipeline。关键特征：提及“实验结果”、“新配体”、“新实验X”、配置文件同目录。处理流程：数据下载→文件匹配→LCMS分析→产率对比。
+
+---
+
+## 📝 2026-07-11 10:24:29
+
+**原始Prompt**: 第一轮实验和第二轮实验结果记录在分析目录中，请帮我对产率进行分析。
+
+**Pipeline类型**: lab_analysis
+
+用户明确请求对历史实验产率进行分析，提及多轮实验记录已存在于分析目录，触发lab_analysis pipeline。关键路由特征：多轮实验对比、产率分析、已有数据目录。
+
+---
+
+## 📝 2026-07-11 10:36:07
+
+**原始Prompt**:   第二轮湿实验优化的结果被存储在/mnt/nas/opencode_data_2/runjob/experiment_results_round2中，请分析新配体在实验D上的结果，配置文件也在相同目录中。
+
+**Pipeline类型**: lab_analysis
+
+用户指定了数据目录和实验ID（实验D），且明确提到“第二轮湿实验优化结果”，触发 lab_analysis pipeline。Pipeline 采用 batch 模式，对单一样本进行分析，路径中包含配置文件，自动完成从实验下载到产率比较的全流程。
+
+---
+
+## 📝 2026-07-11 10:36:42
+
+**原始Prompt**: 第一轮实验和第二轮实验结果记录在分析目录中，请帮我对产率进行分析。
+
+**Pipeline类型**: lab_analysis
+
+用户请求对多轮实验产率分析，特征：多轮次对比（第一轮vs第二轮），指定目录，产率分析任务。直接路由到lab_analysis管道，分析模式自动选为yield_comparison。
+
+---
+

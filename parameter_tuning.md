@@ -664,3 +664,53 @@ Batch mode with single sample (sample_count=1) worked efficiently. Default file 
 
 ---
 
+## 📝 2026-07-11 10:00:19
+
+**原始Prompt**: 第一轮实验和第二轮实验结果记录在分析目录中，请帮我对产率进行分析。
+
+**Pipeline类型**: lab_analysis
+
+分析结果为0/0成功，表明默认参数可能未匹配到有效数据。调优建议：检查文件匹配规则是否与目标文件名一致，可显式提供文件路径列表；验证输入数据中是否包含产率计算必需的列（如产品面积、内标面积）；若数据格式特殊，考虑增加数据清洗步骤。
+
+---
+
+## 📝 2026-07-11 10:02:53
+
+**原始Prompt**: 第二轮湿实验优化的结果被存储在/mnt/nas/opencode_data_2/runjob/experiment_results_round2中，请分析样本二在新实验上的结果，配置文件也在相同目录中。
+
+**Pipeline类型**: lab_analysis
+
+batch模式适用于单样本多文件自动处理；配置文件与数据文件放置在同一目录，可简化路径引用并确保工具自动发现；无需额外实验计划阶段(实验数为0)，直接分析已有结果。
+
+---
+
+## 📝 2026-07-11 10:19:21
+
+**原始Prompt**: 第二轮湿实验优化的结果被存储在/mnt/nas/opencode_data_2/runjob/experiment_results_round2中，请分析样本二在新实验D上的结果，配置文件也在相同目录中。
+
+**Pipeline类型**: lab_analysis
+
+使用默认流程参数即可完成分析，无需额外调优。配置文件自动指定待分析样本和实验，批处理模式处理单样本高效。
+
+---
+
+## 📝 2026-07-11 10:24:03
+
+**原始Prompt**: 第二轮湿实验优化的结果被存储在/mnt/nas/opencode_data_2/runjob/experiment_results_round2中，请分析新配体在新实验D上的结果，配置文件也在相同目录中。
+
+**Pipeline类型**: lab_analysis
+
+未触发参数调优；所有工具以默认配置运行成功。实验D的LC-MS分析使用标准积分参数，产率对比采用峰面积归一化法，适合单样本快速评估。
+
+---
+
+## 📝 2026-07-11 10:24:29
+
+**原始Prompt**: 第一轮实验和第二轮实验结果记录在分析目录中，请帮我对产率进行分析。
+
+**Pipeline类型**: lab_analysis
+
+分析模式设为yield_comparison，实验轮次识别建议在prompt中显式指定轮次关键词（如“第一轮”“第二轮”）以确保file_match正确关联。
+
+---
+
