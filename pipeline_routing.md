@@ -998,3 +998,13 @@ User prompt mentions wet-lab experiment optimization results stored in a specifi
 
 ---
 
+## 📝 2026-07-15 14:50:40
+
+**原始Prompt**: 对 phosphine 膦配体库进行配体优化，用ligand-match-fix_replaced.xlsx数据训练产率模型并筛选 top unseen ligands，同时生成推荐配体的分子图，并选取排名第一的配体，发送给实验室进行湿实验验证。
+
+**Pipeline类型**: reaction_optimization
+
+用户prompt中包含“配体优化”、“产率模型训练”、“top unseen ligands”、“分子图”、“湿实验验证”等关键词，且提供了结构化数据文件(.xlsx)，自动路由至reaction_optimization pipeline。该pipeline依次执行reaction_plan（模型训练与虚拟筛选）、reaction_execute（分子图生成）和lab_submission（推送推荐配体至实验室）。
+
+---
+
