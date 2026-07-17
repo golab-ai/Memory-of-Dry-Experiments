@@ -4,36 +4,6 @@
 
 ---
 
-## 📝 2026-07-07 15:26:48
-
-**原始Prompt**: 对phosphine膦配体库进行配体优化，使用 ligand-match-fix_replaced.xlsx 数据训练产率预测模型，筛选top未见配体（top unseen ligands），并生成推荐配体的分子结构图。推荐结果发送实验室验证。
-
-**Pipeline类型**: reaction_optimization
-
-Prompt特征：包含“配体优化”“产率预测模型”“top unseen ligands”“分子结构图”“实验室验证”等关键词，明确指向化学空间探索与实验反馈闭环。应路由至reaction_optimization pipeline，适用于配体/催化剂虚拟筛选、建模预测和湿实验迭代优化场景。
-
----
-
-## 📝 2026-07-07 15:48:34
-
-**原始Prompt**: 基于 7K7O_clean.pdb 蛋白结构，进行靶向分子生成并规划合成路线。
-
-**Pipeline类型**: drug_design_synthesis
-
-用户输入包含蛋白结构文件（7K7O_clean.pdb）并要求靶向分子生成与合成路线规划，明确指向药物设计-合成一体化流程，因此路由到 drug_design_synthesis pipeline。
-
----
-
-## 📝 2026-07-07 15:52:53
-
-**原始Prompt**: 基于 SMARCA2_clean.pdb 蛋白结构，进行靶向分子生成并规划合成路线。
-
-**Pipeline类型**: drug_design_synthesis
-
-用户Prompt同时包含蛋白结构文件和合成路线规划需求，触发drug_design_synthesis流程。该流程适用于基于靶点结构的从头分子生成、可合成性评估及路线设计场景，采用先设计后合成的串行策略。
-
----
-
 ## 📝 2026-07-07 15:58:13
 
 **原始Prompt**: 请计算材料发现中二氧化碳增稠剂体系的黏度，输入分子文件路径为/mnt/nas/opencode_data_2/ddp_agent_code/huntianling-agent/polymer_systems/p03/p1d.mol。
@@ -1005,6 +975,36 @@ User prompt mentions wet-lab experiment optimization results stored in a specifi
 **Pipeline类型**: reaction_optimization
 
 用户prompt中包含“配体优化”、“产率模型训练”、“top unseen ligands”、“分子图”、“湿实验验证”等关键词，且提供了结构化数据文件(.xlsx)，自动路由至reaction_optimization pipeline。该pipeline依次执行reaction_plan（模型训练与虚拟筛选）、reaction_execute（分子图生成）和lab_submission（推送推荐配体至实验室）。
+
+---
+
+## 📝 2026-07-17 09:14:13
+
+**原始Prompt**: 对phosphine膦配体库进行配体优化，使用 ligand-match-fix_replaced.xlsx 数据训练产率预测模型，筛选top未见配体（top unseen ligands），并生成推荐配体的分子结构图。推荐结果发送实验室验证。
+
+**Pipeline类型**: reaction_optimization
+
+用户意图包含“配体库优化”、“训练产率预测模型”、“筛选top未见配体”、“生成分子结构图”及“提交实验室验证”，总体属于化学反应的预测与优化流程。关键路由特征：需要基于历史数据建模、对虚拟库进行预测排序、并生成分子可视化与实验提交，匹配 reaction_optimization pipeline（含 reaction_plan -> reaction_execute -> lab_submission 阶段）。
+
+---
+
+## 📝 2026-07-17 09:16:34
+
+**原始Prompt**: 对phosphine膦配体库进行配体优化，使用 ligand-match-fix_replaced.xlsx 数据训练产率预测模型，筛选top未见配体（top unseen ligands），并生成推荐配体的分子结构图。推荐结果发送实验室验证。
+
+**Pipeline类型**: reaction_optimization
+
+用户要求进行Phosphine配体库的配体优化，训练产率预测模型，筛选Top未见配体，生成分子结构图并提交实验室验证。关键特征：ligand optimization, yield prediction, unseen ligand screening, molecular visualization, lab submission。这些特征直接触发 reaction_optimization pipeline，侧重于基于机器学习的配体筛选与实验推荐。
+
+---
+
+## 📝 2026-07-17 09:20:57
+
+**原始Prompt**: 对phosphine膦配体库进行配体优化，使用 ligand-match-fix_replaced.xlsx 数据训练产率预测模型，筛选top未见配体（top unseen ligands），并生成推荐配体的分子结构图。推荐结果发送实验室验证。
+
+**Pipeline类型**: reaction_optimization
+
+用户要求对膦配体库进行优化，使用历史数据训练产率预测模型，筛选高产率的未见配体，生成分子结构图并提交实验室验证。这些特征（配体库优化、机器学习模型训练、虚拟筛选、分子可视化、实验室实验请求）明确匹配 **reaction_optimization** 流水线。
 
 ---
 
