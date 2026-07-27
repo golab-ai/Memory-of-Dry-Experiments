@@ -891,3 +891,16 @@ Best parameters for RandomForestRegressor: n_estimators=200, max_depth=8, min_sa
 
 ---
 
+## 📝 2026-07-27 14:53:00
+
+**原始Prompt**: 对phosphine膦配体库进行配体优化，使用 ligand-match-fix_replaced.xlsx 数据训练产率预测模型，筛选top未见配体（top unseen ligands），并生成推荐配体的分子结构图。推荐结果发送实验室验证。
+
+**Pipeline类型**: reaction_optimization
+
+• 分子指纹：半径2，2048位Morgan指纹，能较好表征膦配体结构
+• 模型：Random Forest，n_estimators=200，max_depth=15，min_samples_leaf=3，防止过拟合
+• 筛选Top k：推荐3-5个未见配体，兼顾多样性和高预测产率
+• 交叉验证：5-fold CV评估模型R²>0.7后再用于虚拟筛选
+
+---
+

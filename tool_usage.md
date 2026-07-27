@@ -4,20 +4,6 @@
 
 ---
 
-## 📝 2026-07-07 15:58:13
-
-**原始Prompt**: 请计算材料发现中二氧化碳增稠剂体系的黏度，输入分子文件路径为/mnt/nas/opencode_data_2/ddp_agent_code/huntianling-agent/polymer_systems/p03/p1d.mol。
-
-**Pipeline类型**: materials_discovery
-
-使用lammps_simulation工具进行非平衡分子动力学模拟。关键参数：
-- input_file: /mnt/nas/opencode_data_2/ddp_agent_code/huntianling-agent/polymer_systems/p03/p1d.mol
-- ensemble: NVT或NPT，需先平衡
-- compute: viscosity via SLLOD或Green-Kubo
-- runtime: ≥2 ns production
-
----
-
 ## 📝 2026-07-07 16:01:39
 
 **原始Prompt**: 请基于工作目录中 4ZBF_clean.pdb 蛋白结构，进行靶向分子生成并规划合成路线。
@@ -1195,6 +1181,20 @@ experiment_download: 下载指定分析目录下的实验数据；file_match: �
 - **RDKit**: SMILES解析、生成分子图像、计算Morgan指纹（半径2, 2048 bits）
 - **scikit-learn**: RandomForestRegressor 用于产率预测，train_test_split 划分训练/测试集
 - **内部实验接口**: 通过 lab_submission 工具将推荐配体列表及分子图推送至实验室验证
+
+---
+
+## 📝 2026-07-27 14:53:00
+
+**原始Prompt**: 对phosphine膦配体库进行配体优化，使用 ligand-match-fix_replaced.xlsx 数据训练产率预测模型，筛选top未见配体（top unseen ligands），并生成推荐配体的分子结构图。推荐结果发送实验室验证。
+
+**Pipeline类型**: reaction_optimization
+
+• 加载Excel数据：read_excel（文件'ligand-match-fix_replaced.xlsx'）
+• 产率预测建模：train_model（目标列yield，分子表示用Morgan指纹，算法Random Forest）
+• 虚拟筛选：predict + sort_descending（对未见配体库打分，取top k）
+• 结构图生成：draw_molecule（推荐配体可视化，输出图片文件）
+• 实验室提交：submit_lab（发送推荐列表及结构图至实验系统）
 
 ---
 

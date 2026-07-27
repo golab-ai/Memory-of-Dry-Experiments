@@ -4,16 +4,6 @@
 
 ---
 
-## 📝 2026-07-07 16:12:11
-
-**原始Prompt**: 基于 7XZ5_clean.pdb 蛋白结构，进行靶向分子生成并规划合成路线。
-
-**Pipeline类型**: drug_design_synthesis
-
-当用户的提示包含蛋白质结构文件（如PDB）、靶向分子生成以及合成路线规划时，应路由到 drug_design_synthesis pipeline。关键特征：提供蛋白结构 + 要求生成与之结合的分子 + 规划合成。可简化为“基于结构的药物设计+逆合成分析”场景。
-
----
-
 ## 📝 2026-07-07 16:15:32
 
 **原始Prompt**: 请基于工作目录中CDK2_clean.pdb 蛋白结构，进行靶向分子生成并规划合成路线。
@@ -1005,6 +995,16 @@ User prompt contains keywords: 'phosphine ligand library', 'yield prediction mod
 **Pipeline类型**: reaction_optimization
 
 用户要求对膦配体库进行优化，基于现有数据训练产率预测模型，筛选未见配体并推荐——直接匹配 reaction_optimization pipeline，流程包含：数据加载与清洗 → 分子描述符生成 → 回归模型训练与验证 → 虚拟筛选 top unseen ligands → 分子结构可视化 → 推荐结果提交实验室。关键词：配体优化、训练产率模型、top unseen、推荐。
+
+---
+
+## 📝 2026-07-27 14:53:00
+
+**原始Prompt**: 对phosphine膦配体库进行配体优化，使用 ligand-match-fix_replaced.xlsx 数据训练产率预测模型，筛选top未见配体（top unseen ligands），并生成推荐配体的分子结构图。推荐结果发送实验室验证。
+
+**Pipeline类型**: reaction_optimization
+
+Prompt包含配体库优化、产率预测模型训练、Top unseen配体筛选和分子结构图生成，典型路由至reaction_optimization管道。该管道支持数据驱动的配体优化、模型训练、虚拟筛选与结果可视化，最后提交实验室验证。
 
 ---
 
