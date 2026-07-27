@@ -4,16 +4,6 @@
 
 ---
 
-## 📝 2026-07-07 15:52:53
-
-**原始Prompt**: 基于 SMARCA2_clean.pdb 蛋白结构，进行靶向分子生成并规划合成路线。
-
-**Pipeline类型**: drug_design_synthesis
-
-蛋白结构准备：使用PDB修复工具补全缺失残基、加氢、优化结合位点；分子生成：调用基于三维结构的分子生成模型（如Pocket2Mol或LiGAN），输入为预处理后的蛋白口袋；合成路线规划：使用逆合成分析工具（如AiZynthFinder），输入为生成分子的SMILES，输出多步合成路线。
-
----
-
 ## 📝 2026-07-07 15:58:13
 
 **原始Prompt**: 请计算材料发现中二氧化碳增稠剂体系的黏度，输入分子文件路径为/mnt/nas/opencode_data_2/ddp_agent_code/huntianling-agent/polymer_systems/p03/p1d.mol。
@@ -1192,6 +1182,19 @@ experiment_download: 下载指定分析目录下的实验数据；file_match: �
 - screen_unseen_ligands: flag='top-10' by predicted yield, ensure no overlap with training set via canonical SMILES.
 - generate_molecule_image: library='RDKit', output='PNG grid'.
 - submit_to_lab: endpoint='/api/lab_requests', payload containing ligand IDs, predicted yields, and attached structures.
+
+---
+
+## 📝 2026-07-27 13:44:37
+
+**原始Prompt**: 对phosphine膦配体库进行配体优化，使用 ligand-match-fix_replaced.xlsx 数据训练产率预测模型，筛选top未见配体（top unseen ligands），并生成推荐配体的分子结构图。推荐结果发送实验室验证。
+
+**Pipeline类型**: reaction_optimization
+
+- **pandas**: 读取 ligand-match-fix_replaced.xlsx，处理配体信息和产率数据
+- **RDKit**: SMILES解析、生成分子图像、计算Morgan指纹（半径2, 2048 bits）
+- **scikit-learn**: RandomForestRegressor 用于产率预测，train_test_split 划分训练/测试集
+- **内部实验接口**: 通过 lab_submission 工具将推荐配体列表及分子图推送至实验室验证
 
 ---
 

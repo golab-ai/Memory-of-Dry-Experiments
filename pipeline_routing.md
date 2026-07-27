@@ -4,16 +4,6 @@
 
 ---
 
-## 📝 2026-07-07 16:01:39
-
-**原始Prompt**: 请基于工作目录中 4ZBF_clean.pdb 蛋白结构，进行靶向分子生成并规划合成路线。
-
-**Pipeline类型**: drug_design_synthesis
-
-包含蛋白结构文件（*.pdb）且要求同时实现「靶向分子生成」与「合成路线规划」的任务，应路由至 drug_design_synthesis pipeline。关键特征：输入明确给出蛋白质对象，需求涵盖生成与合成两阶段，且不指定预定义分子库。
-
----
-
 ## 📝 2026-07-07 16:12:11
 
 **原始Prompt**: 基于 7XZ5_clean.pdb 蛋白结构，进行靶向分子生成并规划合成路线。
@@ -1005,6 +995,16 @@ User prompt mentions wet-lab experiment optimization results stored in a specifi
 **Pipeline类型**: reaction_optimization
 
 User prompt contains keywords: 'phosphine ligand library', 'yield prediction model', 'top unseen ligands', 'molecular structure diagrams', 'lab validation'. These indicate a structure–activity relationship (SAR) optimization task with experimental follow-up, matching the reaction_optimization pipeline. The request spans data analysis, predictive modeling, candidate generation, and submission to lab execution.
+
+---
+
+## 📝 2026-07-27 13:44:37
+
+**原始Prompt**: 对phosphine膦配体库进行配体优化，使用 ligand-match-fix_replaced.xlsx 数据训练产率预测模型，筛选top未见配体（top unseen ligands），并生成推荐配体的分子结构图。推荐结果发送实验室验证。
+
+**Pipeline类型**: reaction_optimization
+
+用户要求对膦配体库进行优化，基于现有数据训练产率预测模型，筛选未见配体并推荐——直接匹配 reaction_optimization pipeline，流程包含：数据加载与清洗 → 分子描述符生成 → 回归模型训练与验证 → 虚拟筛选 top unseen ligands → 分子结构可视化 → 推荐结果提交实验室。关键词：配体优化、训练产率模型、top unseen、推荐。
 
 ---
 
