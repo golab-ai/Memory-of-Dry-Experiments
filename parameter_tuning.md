@@ -868,3 +868,13 @@ yield_comparison工具可能需要设置匹配容差（如保留时间偏差、�
 
 ---
 
+## 📝 2026-07-27 12:45:28
+
+**原始Prompt**: 1. 对phosphine膦配体库进行配体优化，使用 ligand-match-fix_replaced.xlsx 数据训练产率预测模型，筛选top未见配体（top unseen ligands），并生成推荐配体的分子结构图。推荐结果发送实验室验证。
+
+**Pipeline类型**: reaction_optimization
+
+Best parameters for RandomForestRegressor: n_estimators=200, max_depth=8, min_samples_split=5, using Morgan fingerprints radius=2, 2048 bits. 5-fold cross-validation gave R²=0.78, MAE=8.3. Tuning recommended: use Bayesian optimization for n_estimators and max_depth, and consider adding steric/electronic descriptors to fingerprints.
+
+---
+

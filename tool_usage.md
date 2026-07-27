@@ -4,19 +4,6 @@
 
 ---
 
-## 📝 2026-07-07 15:48:34
-
-**原始Prompt**: 基于 7K7O_clean.pdb 蛋白结构，进行靶向分子生成并规划合成路线。
-
-**Pipeline类型**: drug_design_synthesis
-
-- 靶点口袋识别：解析PDB结构，自动识别结合位点中心及尺寸，定义对接网格
-- 分子生成：调用靶向分子生成引擎（如基于图或SMILES的模型），设置生成分子数、性质过滤（MW、logP、QED等）
-- 分子对接：使用Vina-type对接工具，指定exhaustiveness=16，对接盒子覆盖口袋
-- 合成路线规划：调用计算机辅助合成规划工具（如AiZynthFinder），设置最大步数≤6，基于商业可得原料
-
----
-
 ## 📝 2026-07-07 15:52:53
 
 **原始Prompt**: 基于 SMARCA2_clean.pdb 蛋白结构，进行靶向分子生成并规划合成路线。
@@ -1191,6 +1178,20 @@ experiment_download: 下载指定分析目录下的实验数据；file_match: �
 - **ligand_screener**: 对新配体库进行批量预测，按产率降序选出 top unseen ligands
 - **draw_molecule**: 生成推荐配体的高清分子结构图 (PNG, 300 dpi)
 - **lab_submitter**: 将推荐分子与图示打包为实验请求，发送至实验室执行系统
+
+---
+
+## 📝 2026-07-27 12:45:28
+
+**原始Prompt**: 1. 对phosphine膦配体库进行配体优化，使用 ligand-match-fix_replaced.xlsx 数据训练产率预测模型，筛选top未见配体（top unseen ligands），并生成推荐配体的分子结构图。推荐结果发送实验室验证。
+
+**Pipeline类型**: reaction_optimization
+
+- load_excel_data: sheet='ligand-match-fix_replaced', columns={'SMILES','yield'}.
+- train_yield_predictor: model='RandomForestRegressor', features='Morgan fingerprints (radius=2, 2048 bits)', test_size=0.2.
+- screen_unseen_ligands: flag='top-10' by predicted yield, ensure no overlap with training set via canonical SMILES.
+- generate_molecule_image: library='RDKit', output='PNG grid'.
+- submit_to_lab: endpoint='/api/lab_requests', payload containing ligand IDs, predicted yields, and attached structures.
 
 ---
 

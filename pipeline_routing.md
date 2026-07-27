@@ -4,16 +4,6 @@
 
 ---
 
-## 📝 2026-07-07 15:58:13
-
-**原始Prompt**: 请计算材料发现中二氧化碳增稠剂体系的黏度，输入分子文件路径为/mnt/nas/opencode_data_2/ddp_agent_code/huntianling-agent/polymer_systems/p03/p1d.mol。
-
-**Pipeline类型**: materials_discovery
-
-关键词包含'计算'、'黏度'、'分子文件路径'以及材料体系，触发materials_discovery pipeline的simulation阶段。
-
----
-
 ## 📝 2026-07-07 16:01:39
 
 **原始Prompt**: 请基于工作目录中 4ZBF_clean.pdb 蛋白结构，进行靶向分子生成并规划合成路线。
@@ -1005,6 +995,16 @@ User prompt mentions wet-lab experiment optimization results stored in a specifi
 **Pipeline类型**: reaction_optimization
 
 用户要求对膦配体库进行优化，使用历史数据训练产率预测模型，筛选高产率的未见配体，生成分子结构图并提交实验室验证。这些特征（配体库优化、机器学习模型训练、虚拟筛选、分子可视化、实验室实验请求）明确匹配 **reaction_optimization** 流水线。
+
+---
+
+## 📝 2026-07-27 12:45:28
+
+**原始Prompt**: 1. 对phosphine膦配体库进行配体优化，使用 ligand-match-fix_replaced.xlsx 数据训练产率预测模型，筛选top未见配体（top unseen ligands），并生成推荐配体的分子结构图。推荐结果发送实验室验证。
+
+**Pipeline类型**: reaction_optimization
+
+User prompt contains keywords: 'phosphine ligand library', 'yield prediction model', 'top unseen ligands', 'molecular structure diagrams', 'lab validation'. These indicate a structure–activity relationship (SAR) optimization task with experimental follow-up, matching the reaction_optimization pipeline. The request spans data analysis, predictive modeling, candidate generation, and submission to lab execution.
 
 ---
 

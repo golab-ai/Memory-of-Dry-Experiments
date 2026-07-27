@@ -604,3 +604,16 @@ yield_comparison 返回 0/0 成功时，通常表示两轮实验中没有可比�
 
 ---
 
+## 📝 2026-07-27 12:45:28
+
+**原始Prompt**: 1. 对phosphine膦配体库进行配体优化，使用 ligand-match-fix_replaced.xlsx 数据训练产率预测模型，筛选top未见配体（top unseen ligands），并生成推荐配体的分子结构图。推荐结果发送实验室验证。
+
+**Pipeline类型**: reaction_optimization
+
+- Duplicate SMILES resolved by keeping highest-yield entry.
+- Missing yield values dropped with warning log.
+- Invalid SMILES (e.g., disconnected structures) filtered via RDKit sanitization, returning 'InvalidSMILES' list for manual review.
+- Lab submission timeout mitigated by asynchronous retry with exponential backoff (max 3 attempts).
+
+---
+
