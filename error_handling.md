@@ -630,3 +630,29 @@ yield_comparison 返回 0/0 成功时，通常表示两轮实验中没有可比�
 
 ---
 
+## 📝 2026-07-28 13:38:02
+
+**原始Prompt**: 对phosphine膦配体库进行配体优化，使用 ligand-match-fix_replaced.xlsx 数据训练产率预测模型，筛选top未见配体（top unseen ligands），并生成推荐配体的分子结构图。推荐结果发送实验室验证。
+
+**Pipeline类型**: reaction_optimization
+
+- **数据格式问题**: 若 Excel 中配体 SMILES 列缺失或无效，使用 `try-except` 跳过并记录无效条目，避免中断流程。
+- **分子图生成失败**: `RDKit` 绘制分子时若不支持某些原子类型，可尝试清理结构或使用 `rdkit.Chem.Draw.MolDraw2DCairo` 提高鲁棒性。
+- **实验室提交异常**: 添加重试机制和超时设置，确保提交状态可追踪，若失败记录日志并人工介入。
+
+---
+
+## 📝 2026-07-28 13:41:22
+
+**原始Prompt**: 对phosphine膦配体库进行配体优化，使用 ligand-match-fix_replaced.xlsx 数据训练产率预测模型，筛选top未见配体（top unseen ligands），并生成推荐配体的分子结构图。推荐结果发送实验室验证。
+
+**Pipeline类型**: reaction_optimization
+
+- 数据读取失败：验证文件路径与扩展名，Excel文件需引擎指定（openpyxl）。
+- 产率列缺失：检查列名是否为“yield”或“产率”，自动模糊匹配或报错提示用户手动标注。
+- SMILES解析错误：使用RDKit的Chem.MolFromSmiles()返回None时，跳过该配体并记录警告，保留有效分子用于图生成。
+- 模型过拟合：若训练集R²远高于验证集，降低树深度、增加正则化参数，并重新采样平衡数据。
+- 实验室提交失败：捕获网络异常，重试3次，失败后保存结果到本地文件等待手动提交。
+
+---
+

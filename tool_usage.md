@@ -4,29 +4,6 @@
 
 ---
 
-## 📝 2026-07-07 16:01:39
-
-**原始Prompt**: 请基于工作目录中 4ZBF_clean.pdb 蛋白结构，进行靶向分子生成并规划合成路线。
-
-**Pipeline类型**: drug_design_synthesis
-
-• 蛋白准备：使用 pdbfixer 或 reduce 添加氢原子、去除异质原子、补全缺失侧链
-• 分子生成：RDKit 结合生成模型（如 LiGAN 或 DiffDock 风格）围绕结合位点生成分子，需预先定义结合位点质心坐标
-• 合成规划：使用 ASKCOS 或 AiZynthFinder，配置库存化合物库（如 eMolecules）和允许反应规则
-• 关键参数：结合位点残基列表、生成分子数量（~100）、合成路线最大深度（≤5步）
-
----
-
-## 📝 2026-07-07 16:12:11
-
-**原始Prompt**: 基于 7XZ5_clean.pdb 蛋白结构，进行靶向分子生成并规划合成路线。
-
-**Pipeline类型**: drug_design_synthesis
-
-蛋白准备：使用结构清理工具去除水分子、杂原子，补齐残基，优化氢键网络。分子生成：采用基于受体结构的生成模型（如口袋条件扩散、强化学习），限定结合位点并应用可合成性约束。合成规划：调用计算机辅助合成设计（CASD）工具，设置起始原料为市售化合物库，限制路线长度≤5步，过滤危险反应条件。
-
----
-
 ## 📝 2026-07-07 16:15:32
 
 **原始Prompt**: 请基于工作目录中CDK2_clean.pdb 蛋白结构，进行靶向分子生成并规划合成路线。
@@ -1195,6 +1172,35 @@ experiment_download: 下载指定分析目录下的实验数据；file_match: �
 • 虚拟筛选：predict + sort_descending（对未见配体库打分，取top k）
 • 结构图生成：draw_molecule（推荐配体可视化，输出图片文件）
 • 实验室提交：submit_lab（发送推荐列表及结构图至实验系统）
+
+---
+
+## 📝 2026-07-28 13:38:02
+
+**原始Prompt**: 对phosphine膦配体库进行配体优化，使用 ligand-match-fix_replaced.xlsx 数据训练产率预测模型，筛选top未见配体（top unseen ligands），并生成推荐配体的分子结构图。推荐结果发送实验室验证。
+
+**Pipeline类型**: reaction_optimization
+
+- **数据加载与预处理**: `pandas.read_excel('ligand-match-fix_replaced.xlsx')` 读取配体-产率数据。
+- **分子表征**: 使用 `RDKit` 从配体结构生成分子指纹（如 Morgan 指纹）或化学特征。
+- **模型训练**: `RandomForestRegressor` 或 `GradientBoostingRegressor` 建立产率预测模型，划分训练/测试集。
+- **虚拟筛选**: 对未见配体库生成特征，利用模型预测产率，按预测值降序获取 top-k。
+- **分子图生成**: `Draw.MolToFile()` 绘制推荐配体结构。
+- **实验室提交**: 调用 `send_experiment_request` 函数，将推荐配体列表及相关信息发送至实验室系统（例如通过邮件或 API）。
+
+---
+
+## 📝 2026-07-28 13:41:22
+
+**原始Prompt**: 对phosphine膦配体库进行配体优化，使用 ligand-match-fix_replaced.xlsx 数据训练产率预测模型，筛选top未见配体（top unseen ligands），并生成推荐配体的分子结构图。推荐结果发送实验室验证。
+
+**Pipeline类型**: reaction_optimization
+
+- 数据加载：pandas读取Excel文件（ligand-match-fix_replaced.xlsx），确保产率及特征列正确。
+- 产率预测模型：使用scikit-learn（RandomForestRegressor/GradientBoostingRegressor）或chemprop，训练集/测试集分割。
+- 配体筛选：基于模型对unseen配体库预测产率，取top-k，结合多样性过滤。
+- 结构图生成：RDKit解析SMILES，matplotlib/molplotly绘制分子结构图。
+- 实验室提交：调用lab_submission模块，发送推荐配体列表及结构图。
 
 ---
 
