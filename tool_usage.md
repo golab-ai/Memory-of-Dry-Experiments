@@ -4,19 +4,6 @@
 
 ---
 
-## 📝 2026-07-07 16:15:32
-
-**原始Prompt**: 请基于工作目录中CDK2_clean.pdb 蛋白结构，进行靶向分子生成并规划合成路线。
-
-**Pipeline类型**: drug_design_synthesis
-
-- **分子生成**: LiGAN 或 MolGPT，参数：num_molecules=100，基于受体口袋条件生成
-- **对接筛选**: AutoDock Vina，盒子大小围绕CDK2 ATP结合位点（center_x=...，size=20×20×20 Å³），exhaustiveness=16
-- **合成路线**: AiZynthFinder，使用库存可及原料，最大深度=8，时间限制=120s
-- **可合成性过滤**: SA_Score <4.0，QED >0.4
-
----
-
 ## 📝 2026-07-07 16:20:21
 
 **原始Prompt**: 请基于工作目录中GPR139_clean.pdb 蛋白结构，进行靶向分子生成并规划合成路线。
@@ -1201,6 +1188,19 @@ experiment_download: 下载指定分析目录下的实验数据；file_match: �
 - 配体筛选：基于模型对unseen配体库预测产率，取top-k，结合多样性过滤。
 - 结构图生成：RDKit解析SMILES，matplotlib/molplotly绘制分子结构图。
 - 实验室提交：调用lab_submission模块，发送推荐配体列表及结构图。
+
+---
+
+## 📝 2026-08-03 09:37:01
+
+**原始Prompt**: 对phosphine膦配体库进行配体优化，使用 ligand-match-fix_replaced.xlsx 数据训练产率预测模型，筛选top未见配体（top unseen ligands），并生成推荐配体的分子结构图。推荐结果发送实验室验证。
+
+**Pipeline类型**: reaction_optimization
+
+• pandas: read_excel 加载 ligand-match-fix_replaced.xlsx 训练数据
+• scikit-learn: RandomForestRegressor 构建产率预测模型，使用默认超参数
+• RDKit: Chem.MolFromSmiles 解析分子，Draw.MolToImage 生成推荐配体结构图
+• lab_submission: 调用实验室消息通知接口发送推荐结果至验证团队
 
 ---
 

@@ -4,16 +4,6 @@
 
 ---
 
-## 📝 2026-07-07 16:25:57
-
-**原始Prompt**: 请计算电解液体系的等温压缩系数，输入分子文件路径为/mnt/nas/opencode_data_2/ddp_agent_code/huntianling-agent/polymer_systems/p10/ec.mol。
-
-**Pipeline类型**: materials_discovery
-
-用户要求计算电解液体系的等温压缩系数，输入为.mol分子文件。关键词“等温压缩系数”、“电解液”触发材料物理性质计算，路由至 materials_discovery pipeline 的模拟阶段。该阶段自动调用分子动力学引擎执行在线性质和热力学量计算。
-
----
-
 ## 📝 2026-07-07 16:28:03
 
 **原始Prompt**: 请基于工作目录中 Nav1.7_clean.pdb 蛋白结构，进行靶向分子生成并规划合成路线。
@@ -1003,6 +993,16 @@ Prompt包含配体库优化、产率预测模型训练、Top unseen配体筛选�
 **Pipeline类型**: reaction_optimization
 
 用户prompt包含配体库优化、产率预测模型训练、未见配体虚拟筛选、分子结构图生成及实验室验证指令时，路由至reaction_optimization pipeline。关键触发词：膦配体优化、ligand match、产率预测、top unseen ligands、推荐结构图、发送实验室验证。
+
+---
+
+## 📝 2026-08-03 09:37:01
+
+**原始Prompt**: 对phosphine膦配体库进行配体优化，使用 ligand-match-fix_replaced.xlsx 数据训练产率预测模型，筛选top未见配体（top unseen ligands），并生成推荐配体的分子结构图。推荐结果发送实验室验证。
+
+**Pipeline类型**: reaction_optimization
+
+当用户请求为膦配体库进行基于数据的配体优化，要求用指定Excel文件训练产率预测模型，并从库中筛选top unseen配体，同时生成分子结构图并提交实验室验证时，路由至 reaction_optimization pipeline 的 ligand_optimization 子流程。关键特征：`ligand library`、`train yield prediction model`、`unseen ligands`、`molecular structure images`、`lab submission`。
 
 ---
 
