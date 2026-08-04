@@ -656,3 +656,25 @@ yield_comparison 返回 0/0 成功时，通常表示两轮实验中没有可比�
 
 ---
 
+## 📝 2026-08-04 13:40:08
+
+**原始Prompt**: 对phosphine膦配体库进行配体优化，使用 ligand-match-fix_replaced.xlsx 数据训练产率预测模型，筛选top未见配体（top unseen ligands），并生成推荐配体的分子结构图。推荐结果发送实验室验证。
+
+**Pipeline类型**: reaction_optimization
+
+1) 数据缺失导致模型训练中断：利用中位数填充数值特征，众数填充类别特征，移除无产率标签行。
+2) 虚拟配体库过大内存溢出：改为分批加载预测，设置候选池上限 10,000 个分子。
+3) 实验室提交接口超时：实现指数退避重试机制（最多 3 次），并添加请求状态检查，确保提交成功。
+
+---
+
+## 📝 2026-08-04 13:43:25
+
+**原始Prompt**: 对phosphine膦配体库进行配体优化，使用 ligand-match-fix_replaced.xlsx 数据训练产率预测模型，筛选top未见配体（top unseen ligands），并生成推荐配体的分子结构图。推荐结果发送实验室验证。
+
+**Pipeline类型**: reaction_optimization
+
+数据预处理阶段已使用 ligand-match-fix_replaced.xlsx 解决了先前配体名称与SMILES不匹配的问题，确保输入一致性。后续流程无错误发生，但注意若predicted yields含有NaN，需回退检查featurization步骤，确保所有分子正确编码。
+
+---
+

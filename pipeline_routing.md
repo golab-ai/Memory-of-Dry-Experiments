@@ -4,26 +4,6 @@
 
 ---
 
-## 📝 2026-07-07 16:28:03
-
-**原始Prompt**: 请基于工作目录中 Nav1.7_clean.pdb 蛋白结构，进行靶向分子生成并规划合成路线。
-
-**Pipeline类型**: drug_design_synthesis
-
-当用户 prompt 同时包含靶点结构（PDB文件）与分子生成、合成路线规划意图时，路由至 drug_design_synthesis pipeline。关键特征词：蛋白结构、靶向分子生成、合成路线。
-
----
-
-## 📝 2026-07-07 16:33:41
-
-**原始Prompt**: 为Suzuki E/Z选择性相关反应推荐最高转化率的反应条件，优化catalyst、base、solvent和cosolvent组合，使用 suzuki-ez.xlsx数据进行主动学习迭代优化。
-
-**Pipeline类型**: reaction_optimization
-
-用户要求优化Suzuki E/Z选择性反应条件（catalyst, base, solvent, cosolvent），并指定使用主动学习迭代。特征：多变量组合优化、明确数据源（Excel文件）、目标为最大化转化率。路由至 reaction_optimization pipeline，该管道支持基于贝叶斯优化的实验设计、数据加载和迭代建议。
-
----
-
 ## 📝 2026-07-07 16:39:44
 
 **原始Prompt**: 请基于工作目录中 HPK1_clean.pdb 蛋白结构，进行靶向分子生成并规划合成路线。
@@ -1003,6 +983,26 @@ Prompt包含配体库优化、产率预测模型训练、Top unseen配体筛选�
 **Pipeline类型**: reaction_optimization
 
 当用户请求为膦配体库进行基于数据的配体优化，要求用指定Excel文件训练产率预测模型，并从库中筛选top unseen配体，同时生成分子结构图并提交实验室验证时，路由至 reaction_optimization pipeline 的 ligand_optimization 子流程。关键特征：`ligand library`、`train yield prediction model`、`unseen ligands`、`molecular structure images`、`lab submission`。
+
+---
+
+## 📝 2026-08-04 13:40:08
+
+**原始Prompt**: 对phosphine膦配体库进行配体优化，使用 ligand-match-fix_replaced.xlsx 数据训练产率预测模型，筛选top未见配体（top unseen ligands），并生成推荐配体的分子结构图。推荐结果发送实验室验证。
+
+**Pipeline类型**: reaction_optimization
+
+用户 prompt 中明确提出“配体库”“膦配体优化”“产率预测模型训练”“top unseen ligands”“分子结构图”“实验室验证”，属于典型的数据驱动配体筛选与优化任务，自动路由至 reaction_optimization pipeline。该 pipeline 的设计目标是从已有实验数据学习产率规律，推荐高潜力未见配体并输出可视化结果以支持实验验证。
+
+---
+
+## 📝 2026-08-04 13:43:25
+
+**原始Prompt**: 对phosphine膦配体库进行配体优化，使用 ligand-match-fix_replaced.xlsx 数据训练产率预测模型，筛选top未见配体（top unseen ligands），并生成推荐配体的分子结构图。推荐结果发送实验室验证。
+
+**Pipeline类型**: reaction_optimization
+
+用户prompt包含'phosphine膦配体库'、'配体优化'、'训练产率预测模型'、'筛选top unseen配体'、'生成推荐配体的分子结构图'并'发送实验室验证'，这些关键特征映射到reaction_optimization pipeline，因为该pipeline专门处理基于历史数据的配体/反应条件优化、模型预测筛选和实验验证提交的端到端流程。
 
 ---
 

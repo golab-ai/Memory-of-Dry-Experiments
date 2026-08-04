@@ -4,33 +4,6 @@
 
 ---
 
-## 📝 2026-07-07 16:20:21
-
-**原始Prompt**: 请基于工作目录中GPR139_clean.pdb 蛋白结构，进行靶向分子生成并规划合成路线。
-
-**Pipeline类型**: drug_design_synthesis
-
-- **pocket_detection**: 从GPR139_clean.pdb识别结合口袋中心与残基
-- **structure_based_generation** (如 Pocket2Mol): 生成口袋内分子
-- **synthesis_planner** (如 AiZynthFinder): 检查合成可及性，输出路线
-- **screening_filter**: 类药性、ADMET初步筛除
-
----
-
-## 📝 2026-07-07 16:25:57
-
-**原始Prompt**: 请计算电解液体系的等温压缩系数，输入分子文件路径为/mnt/nas/opencode_data_2/ddp_agent_code/huntianling-agent/polymer_systems/p10/ec.mol。
-
-**Pipeline类型**: materials_discovery
-
-使用 GROMACS 完成计算：
-- 用 openbabel 将 ec.mol 转换为 .gro 和 .top 文件
-- 搭建 NPT 系综：温度 300 K，压力 1 bar，v-rescale 温度耦合，Parrinello-Rahman 压力耦合
-- 运行 10 ns 平衡 + 40 ns 生产模拟，每 1 ps 输出体积
-- 通过 gmx energy 提取体积序列，计算压缩系数 χ = (⟨V²⟩-⟨V⟩²)/(kBT⟨V⟩)
-
----
-
 ## 📝 2026-07-07 16:28:03
 
 **原始Prompt**: 请基于工作目录中 Nav1.7_clean.pdb 蛋白结构，进行靶向分子生成并规划合成路线。
@@ -1201,6 +1174,36 @@ experiment_download: 下载指定分析目录下的实验数据；file_match: �
 • scikit-learn: RandomForestRegressor 构建产率预测模型，使用默认超参数
 • RDKit: Chem.MolFromSmiles 解析分子，Draw.MolToImage 生成推荐配体结构图
 • lab_submission: 调用实验室消息通知接口发送推荐结果至验证团队
+
+---
+
+## 📝 2026-08-04 13:40:08
+
+**原始Prompt**: 对phosphine膦配体库进行配体优化，使用 ligand-match-fix_replaced.xlsx 数据训练产率预测模型，筛选top未见配体（top unseen ligands），并生成推荐配体的分子结构图。推荐结果发送实验室验证。
+
+**Pipeline类型**: reaction_optimization
+
+• ligand_dataset_loader：读取 ligand-match-fix_replaced.xlsx，自动解析配体描述符与产率列，处理缺失值并标准化特征。
+• yield_predictor_trainer：基于 AutoML 框架，对比 RandomForest、XGBoost、MLP 等模型，5 折交叉验证选最优。
+• unseen_ligand_ranker：对虚拟配体库应用最优模型预测产率，按预测值降序取 top-10 unseen ligands。
+• mol_graph_generator：调用 RDKit 绘制推荐配体结构并保存为 PNG。
+• lab_submitter：将推荐列表及结构图打包，发送至 ELN/LIMS 系统。
+
+---
+
+## 📝 2026-08-04 13:43:25
+
+**原始Prompt**: 对phosphine膦配体库进行配体优化，使用 ligand-match-fix_replaced.xlsx 数据训练产率预测模型，筛选top未见配体（top unseen ligands），并生成推荐配体的分子结构图。推荐结果发送实验室验证。
+
+**Pipeline类型**: reaction_optimization
+
+主要工具及用法：
+- data_loader: 读取 ligand-match-fix_replaced.xlsx 获取配体结构与产率数据。
+- featurizer: 提取分子描述符（如RDKit fingerprints）用于模型输入。
+- model_trainer: 使用随机森林回归训练产率预测模型（参数见调优）。
+- ligand_screener: 在未包含于训练集的配体中，基于预测产率排序筛选top unseen ligands。
+- structure_visualizer: 利用RDKit绘制推荐配体的分子结构图。
+- lab_submitter: 将推荐结果封装并提交至实验室验证系统。
 
 ---
 
