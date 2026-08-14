@@ -4,16 +4,6 @@
 
 ---
 
-## 📝 2026-07-07 16:28:03
-
-**原始Prompt**: 请基于工作目录中 Nav1.7_clean.pdb 蛋白结构，进行靶向分子生成并规划合成路线。
-
-**Pipeline类型**: drug_design_synthesis
-
-分子生成：使用 REINVENT 或 LibINVENT，需指定 scaffold 约束和基于对接打分（Vina score）的奖励函数。对接工具：AutoDock Vina，准备受体需用 prepare_receptor4.py，配体用 obabel 转换。合成规划：AiZynthFinder，参数 cut_number=200, radius=3, minimum_returning=5。
-
----
-
 ## 📝 2026-07-07 16:33:41
 
 **原始Prompt**: 为Suzuki E/Z选择性相关反应推荐最高转化率的反应条件，优化catalyst、base、solvent和cosolvent组合，使用 suzuki-ez.xlsx数据进行主动学习迭代优化。
@@ -1204,6 +1194,17 @@ experiment_download: 下载指定分析目录下的实验数据；file_match: �
 - ligand_screener: 在未包含于训练集的配体中，基于预测产率排序筛选top unseen ligands。
 - structure_visualizer: 利用RDKit绘制推荐配体的分子结构图。
 - lab_submitter: 将推荐结果封装并提交至实验室验证系统。
+
+---
+
+## 📝 2026-08-14 10:48:10
+
+**原始Prompt**: 对phosphine膦配体库进行配体优化，使用 ligand-match-fix_replaced.xlsx 数据训练产率预测模型，筛选top未见配体（top unseen ligands），并生成推荐配体的分子结构图。推荐结果发送实验室验证。
+
+
+**Pipeline类型**: reaction_optimization
+
+训练数据：ligand-match-fix_replaced.xlsx，读取配体ID、SMILES、产率标签。模型：优先使用随机森林或XGBoost回归预测产率；用RDKit计算分子描述符并生成推荐配体结构图（PNG）。实验室提交：lab_submission工具传递推荐配体列表、预测产率和结构图路径。
 
 ---
 

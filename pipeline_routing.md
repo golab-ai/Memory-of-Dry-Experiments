@@ -4,16 +4,6 @@
 
 ---
 
-## 📝 2026-07-07 16:39:44
-
-**原始Prompt**: 请基于工作目录中 HPK1_clean.pdb 蛋白结构，进行靶向分子生成并规划合成路线。
-
-**Pipeline类型**: drug_design_synthesis
-
-用户提示中同时包含靶向分子生成和合成路线规划，且明确指定了蛋白结构文件（HPK1_clean.pdb），属于多阶段药物设计任务，因此路由至 drug_design_synthesis pipeline，并拆分为 drug_design_plan → drug_design_execute 两阶段执行。
-
----
-
 ## 📝 2026-07-07 16:49:33
 
 **原始Prompt**: 为Buchwald-Hartwig胺化反应进行配体、碱和添加剂的条件优化，基于实验数据 Buchwald-HartwigDataset.csv进行迭代优化，推荐下一批最值得测试的实验组合。
@@ -1003,6 +993,17 @@ Prompt包含配体库优化、产率预测模型训练、Top unseen配体筛选�
 **Pipeline类型**: reaction_optimization
 
 用户prompt包含'phosphine膦配体库'、'配体优化'、'训练产率预测模型'、'筛选top unseen配体'、'生成推荐配体的分子结构图'并'发送实验室验证'，这些关键特征映射到reaction_optimization pipeline，因为该pipeline专门处理基于历史数据的配体/反应条件优化、模型预测筛选和实验验证提交的端到端流程。
+
+---
+
+## 📝 2026-08-14 10:48:10
+
+**原始Prompt**: 对phosphine膦配体库进行配体优化，使用 ligand-match-fix_replaced.xlsx 数据训练产率预测模型，筛选top未见配体（top unseen ligands），并生成推荐配体的分子结构图。推荐结果发送实验室验证。
+
+
+**Pipeline类型**: reaction_optimization
+
+含“配体库优化/产率预测/未见配体筛选/结构图/实验室验证”等关键词，路由至 reaction_optimization；阶段固定为 reaction_plan → reaction_execute → lab_submission。提供 .xlsx 训练数据时触发产率模型训练与虚拟筛选，输出推荐配体并送实验验证。
 
 ---
 
