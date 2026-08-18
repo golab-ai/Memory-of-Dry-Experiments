@@ -4,36 +4,6 @@
 
 ---
 
-## 📝 2026-07-07 16:52:51
-
-**原始Prompt**: 湿实验结果被存储在/mnt/nas/opencode_data_2/runjob/experiment_results中，请分析样本一和样本二在所有实验上的结果，配置文件也在相同目录中，最终给出总体对比结果。
-
-**Pipeline类型**: lab_analysis
-
-用户prompt中包含数据目录路径、要求对比多个样本在所有实验上的结果，触发lab_analysis pipeline。关键特征：指定了湿实验数据存放位置、多样本对比意图。
-
----
-
-## 📝 2026-07-07 16:53:04
-
-**原始Prompt**: 湿实验结果被存储在/mnt/nas/opencode_data_2/runjob/experiment_results中，请分析样本一和样本二在所有实验上的结果，配置文件也在相同目录中，最终给出总体对比结果。
-
-**Pipeline类型**: lab_analysis
-
-用户prompt指定湿实验数据存储路径，要求分析多个样本的所有实验结果并进行总体对比，应路由至lab_analysis pipeline。关键特征：明确的数据目录路径、多样本对比请求、引用配置文件。
-
----
-
-## 📝 2026-07-07 16:56:42
-
-**原始Prompt**: Phosphine优化的湿实验结果被存储在/mnt/nas/opencode_data_2/runjob/experiment_results中，请分析样本一和样本二在所有实验上的结果，配置文件也在相同目录中，最终给出总体对比结果。
-
-**Pipeline类型**: reaction_optimization
-
-当用户提示词明确涉及‘分析湿实验结果’、‘对比样本’且指定数据目录和配置文件时，应路由到 reaction_optimization pipeline，优先触发实验后分析流程（reaction_plan → reaction_execute → lab_submission → result_analysis）。关键词：湿实验、结果文件、配置文件、对比。
-
----
-
 ## 📝 2026-07-07 17:04:58
 
 **原始Prompt**: Phosphine优化的湿实验结果被存储在/mnt/nas/opencode_data_2/runjob/experiment_results中，请分析样本一和样本二在所有实验上的结果，配置文件也在相同目录中，最终给出总体对比结果。
@@ -1004,6 +974,38 @@ Prompt包含配体库优化、产率预测模型训练、Top unseen配体筛选�
 **Pipeline类型**: reaction_optimization
 
 识别关键词：膦配体/配体库优化、产率预测模型、top unseen ligands、分子结构图、实验室验证。此类需求路由至 reaction_optimization，阶段为 reaction_plan → reaction_execute → lab_submission；不要错分到单一分子生成或逆合成流程。
+
+---
+
+## 📝 2026-08-18 11:09:51
+
+**原始Prompt**: 对phosphine膦配体库进行配体优化，使用 ligand-match-fix_replaced.xlsx 数据训练产率预测模型，筛选top未见配体（top unseen ligands），并生成推荐配体的分子结构图。推荐结果发送实验室验证。
+
+**Pipeline类型**: reaction_optimization
+
+含配体库优化、产率预测模型训练、未见配体筛选、分子结构图生成及实验室验证场景，应路由至 reaction_optimization pipeline。关键词：ligand optimization、yield prediction、top unseen ligands、lab submission。执行阶段按 reaction_plan → reaction_execute → lab_submission 组织；若仅有分子生成且无实验数据/实验室提交，勿使用此 pipeline。
+
+---
+
+## 📝 2026-08-18 11:14:04
+
+**原始Prompt**: 对phosphine膦配体库进行配体优化，使用 ligand-match-fix_replaced.xlsx 数据训练产率预测模型，筛选top未见配体（top unseen ligands），并生成推荐配体的分子结构图。推荐结果发送实验室验证。
+
+**Pipeline类型**: reaction_optimization
+
+用户prompt包含配体库优化、产率预测模型训练、筛选top unseen ligands并生成分子结构图、提交实验室验证。关键特征：phosphine ligand library + yield prediction from Excel + unseen candidate screening + structure visualization + lab submission。此类任务应路由至 reaction_optimization pipeline，执行 reaction_plan → reaction_execute → lab_submission。
+
+---
+
+## 📝 2026-08-18 11:22:50
+
+**原始Prompt**: 对phosphine膦配体库进行配体优化，使用 ligand-match-fix_replaced.xlsx 数据训练产率预测模型，筛选top未见配体（top unseen ligands），并生成推荐配体的分子结构图。推荐结果发送实验室验证。
+
+**Pipeline类型**: reaction_optimization
+
+- 用户prompt包含“配体库优化/训练产率预测模型/筛选top unseen ligands/生成分子结构图/实验室验证” → 路由至 reaction_optimization
+- 关键特征：需处理Excel配体数据、训练产率预测模型、对未见配体进行虚拟筛选、输出分子结构图并提交实验
+- 执行流程：reaction_plan → reaction_execute → lab_submission
 
 ---
 

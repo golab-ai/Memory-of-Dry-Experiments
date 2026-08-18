@@ -4,36 +4,6 @@
 
 ---
 
-## 📝 2026-07-07 16:49:33
-
-**原始Prompt**: 为Buchwald-Hartwig胺化反应进行配体、碱和添加剂的条件优化，基于实验数据 Buchwald-HartwigDataset.csv进行迭代优化，推荐下一批最值得测试的实验组合。
-
-**Pipeline类型**: reaction_optimization
-
-使用反应优化引擎加载 Buchwald-HartwigDataset.csv 并解析为优化搜索空间。工具关键用法：指定优化目标为 Yield，定义离散参数空间（配体、碱、添加剂），调用贝叶斯优化器（如 GPyOpt），设置初始随机采样，生成下一批推荐组合。
-
----
-
-## 📝 2026-07-07 16:52:10
-
-**原始Prompt**: 湿实验结果被存储在/mnt/nas/opencode_data_2/runjob/experiment_results中，请分析样本一和样本二在所有实验上的结果，配置文件也在相同目录中，最终给出总体对比结果。
-
-**Pipeline类型**: lab_analysis
-
-file_match: 使用样本标识(样本一/样本二)与通配符'*实验*'在指定目录匹配数据文件，返回文件列表。lcms_execute: 批量调用质谱数据分析，输入为每个样本-实验组合的数据文件路径和共享配置文件，输出每个分析的常规结果。将样本与实验交叉组合，生成8个独立任务并行执行，全部返回成功。
-
----
-
-## 📝 2026-07-07 16:52:51
-
-**原始Prompt**: 湿实验结果被存储在/mnt/nas/opencode_data_2/runjob/experiment_results中，请分析样本一和样本二在所有实验上的结果，配置文件也在相同目录中，最终给出总体对比结果。
-
-**Pipeline类型**: lab_analysis
-
-experiment_download: 从指定目录下载配置文件；file_match: 根据样本名称和实验配置匹配原始数据文件；lcms_execute: 批量运行LC-MS分析并汇总对比结果。
-
----
-
 ## 📝 2026-07-07 16:53:04
 
 **原始Prompt**: 湿实验结果被存储在/mnt/nas/opencode_data_2/runjob/experiment_results中，请分析样本一和样本二在所有实验上的结果，配置文件也在相同目录中，最终给出总体对比结果。
@@ -1202,6 +1172,44 @@ experiment_download: 下载指定分析目录下的实验数据；file_match: �
 **Pipeline类型**: reaction_optimization
 
 read_excel: 读取 ligand-match-fix_replaced.xlsx，指定 SMILES 和 yield 列。train_yield_model: 输入配体描述符与产率，训练回归模型。predict_unseen: 对未见配体批量预测并排序。draw_molecule: 用 RDKit 为 top 配体生成结构图（PNG/SVG）。submit_lab: 发送推荐列表，包含配体ID、SMILES、预测产率、图像路径。
+
+---
+
+## 📝 2026-08-18 11:09:51
+
+**原始Prompt**: 对phosphine膦配体库进行配体优化，使用 ligand-match-fix_replaced.xlsx 数据训练产率预测模型，筛选top未见配体（top unseen ligands），并生成推荐配体的分子结构图。推荐结果发送实验室验证。
+
+**Pipeline类型**: reaction_optimization
+
+数据：pandas/openpyxl 读取 ligand-match-fix_replaced.xlsx，检查列名与缺失值。建模：scikit-learn/chemprop 训练产率预测模型，使用分子指纹或描述符作为特征。筛选：对未见配体预测产率并排序取 top N。结构图：RDKit 从 SMILES 生成分子结构图，设置 dpi=300，标注索引和预测产率。提交：lab_submission API 上传推荐配体 ID、SMILES、预测产率及结构图附件，需做格式校验。
+
+---
+
+## 📝 2026-08-18 11:14:04
+
+**原始Prompt**: 对phosphine膦配体库进行配体优化，使用 ligand-match-fix_replaced.xlsx 数据训练产率预测模型，筛选top未见配体（top unseen ligands），并生成推荐配体的分子结构图。推荐结果发送实验室验证。
+
+**Pipeline类型**: reaction_optimization
+
+- 数据读取：使用Excel/CSV解析 ligand-match-fix_replaced.xlsx；
+- 特征工程：使用分子指纹（ECFP4/6）或描述符；
+- 产率模型：训练随机森林/梯度提升回归器；
+- 虚拟筛选：对未见过配体库预测产率并排序；
+- 结构图：用RDKit生成分子图；
+- 提交：调用lab_submission接口发送推荐结果。
+
+---
+
+## 📝 2026-08-18 11:22:50
+
+**原始Prompt**: 对phosphine膦配体库进行配体优化，使用 ligand-match-fix_replaced.xlsx 数据训练产率预测模型，筛选top未见配体（top unseen ligands），并生成推荐配体的分子结构图。推荐结果发送实验室验证。
+
+**Pipeline类型**: reaction_optimization
+
+- 使用 pandas/openpyxl 读取 ligand-match-fix_replaced.xlsx，注意指定sheet和列名
+- 使用 RDKit 解析SMILES、生成Morgan指纹和分子结构图（PNG/SVG）
+- 使用 scikit-learn/XGBoost 训练产率预测模型，对unseen配体打分排序
+- 使用实验室提交工具/API发送推荐配体ID、SMILES、预测产率和结构图
 
 ---
 

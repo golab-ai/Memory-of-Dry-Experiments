@@ -712,3 +712,41 @@ xlsx 中存在重复或缺失 SMILES：先清洗去重，标准化 SMILES。RDKi
 
 ---
 
+## 📝 2026-08-18 11:09:51
+
+**原始Prompt**: 对phosphine膦配体库进行配体优化，使用 ligand-match-fix_replaced.xlsx 数据训练产率预测模型，筛选top未见配体（top unseen ligands），并生成推荐配体的分子结构图。推荐结果发送实验室验证。
+
+**Pipeline类型**: reaction_optimization
+
+数据文件可能含缺失值、重复行或无效 SMILES，需 dropna、去重；RDKit SanitizeMol 捕获无效分子并跳过。模型过拟合：用交叉验证监控，必要时减少特征或增大正则化。预测 unseen ligands 分布偏移：保留外部验证集，避免测试信息泄露。实验室提交：增加 API 重试、超时和格式校验；确认结构图文件存在，避免提交空附件。
+
+---
+
+## 📝 2026-08-18 11:14:04
+
+**原始Prompt**: 对phosphine膦配体库进行配体优化，使用 ligand-match-fix_replaced.xlsx 数据训练产率预测模型，筛选top未见配体（top unseen ligands），并生成推荐配体的分子结构图。推荐结果发送实验室验证。
+
+**Pipeline类型**: reaction_optimization
+
+- Excel数据格式不一致：预先标准化SMILES、去重、处理缺失产率；
+- 数据泄露：使用scaffold split确保unseen ligands不参与训练；
+- 无效SMILES：RDKit解析失败则跳过并记录；
+- 预测方差大：使用集成模型或置信区间过滤；
+- 提交失败：lab_submission校验分子结构并重试接口。
+
+---
+
+## 📝 2026-08-18 11:22:50
+
+**原始Prompt**: 对phosphine膦配体库进行配体优化，使用 ligand-match-fix_replaced.xlsx 数据训练产率预测模型，筛选top未见配体（top unseen ligands），并生成推荐配体的分子结构图。推荐结果发送实验室验证。
+
+**Pipeline类型**: reaction_optimization
+
+- xlsx读取失败：检查sheet名、列名，使用openpyxl引擎读取修复版本
+- SMILES无效：用RDKit Sanitize过滤并记录失败条目，避免中断流程
+- 模型过拟合：通过交叉验证和独立unseen集评估，不直接使用全部数据训练
+- 分子结构图生成失败：标准化分子、检查原子价，必要时输出SVG备用
+- 提交前校验：确保推荐配体ID、SMILES、预测产率和图片路径完整
+
+---
+

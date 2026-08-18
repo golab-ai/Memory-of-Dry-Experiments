@@ -983,3 +983,40 @@ Best parameters for RandomForestRegressor: n_estimators=200, max_depth=8, min_sa
 
 ---
 
+## 📝 2026-08-18 11:09:51
+
+**原始Prompt**: 对phosphine膦配体库进行配体优化，使用 ligand-match-fix_replaced.xlsx 数据训练产率预测模型，筛选top未见配体（top unseen ligands），并生成推荐配体的分子结构图。推荐结果发送实验室验证。
+
+**Pipeline类型**: reaction_optimization
+
+特征：Morgan指纹 radius=2，2048 bits 或 MACCS keys。模型：Random Forest / Gradient Boosting 优于简单线性，5折交叉验证评估。Top unseen ligands 建议 10–20 个，预测产率高于训练集基线均值。结构图 dpi≥300，统一图像尺寸。训练前去除低方差特征；数据量小时使用集成模型并加正则化/早停。
+
+---
+
+## 📝 2026-08-18 11:14:04
+
+**原始Prompt**: 对phosphine膦配体库进行配体优化，使用 ligand-match-fix_replaced.xlsx 数据训练产率预测模型，筛选top未见配体（top unseen ligands），并生成推荐配体的分子结构图。推荐结果发送实验室验证。
+
+**Pipeline类型**: reaction_optimization
+
+- 分子指纹：ECFP4，radius=2，1024/2048 bits；
+- 模型：Random Forest n_estimators=200-500，max_depth=5-10，min_samples_leaf=2；
+- 验证：5折交叉验证或scaffold split；
+- 筛选：top 5-20个预测产率高且结构多样的unseen ligands；
+- 结构图：300 dpi PNG。
+
+---
+
+## 📝 2026-08-18 11:22:50
+
+**原始Prompt**: 对phosphine膦配体库进行配体优化，使用 ligand-match-fix_replaced.xlsx 数据训练产率预测模型，筛选top未见配体（top unseen ligands），并生成推荐配体的分子结构图。推荐结果发送实验室验证。
+
+**Pipeline类型**: reaction_optimization
+
+- 分子表征：Morgan fingerprint，radius=2，2048 bits
+- 模型：优先使用集成树模型（RandomForest/GradientBoosting/XGBoost），调优n_estimators、max_depth、learning_rate
+- 评估：使用5折交叉验证，并保留unseen测试集防止数据泄漏
+- 筛选：选取预测产率最高的10-20个unseen配体，兼顾结构多样性
+
+---
+
