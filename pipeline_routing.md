@@ -4,26 +4,6 @@
 
 ---
 
-## 📝 2026-07-07 16:49:33
-
-**原始Prompt**: 为Buchwald-Hartwig胺化反应进行配体、碱和添加剂的条件优化，基于实验数据 Buchwald-HartwigDataset.csv进行迭代优化，推荐下一批最值得测试的实验组合。
-
-**Pipeline类型**: reaction_optimization
-
-包含反应条件优化、实验设计、数据集分析等关键词的提示应路由至 reaction_optimization pipeline。检测到指定反应类型（如 Buchwald-Hartwig）、历史数据文件（.csv）、待优化参数（配体/碱/添加剂）和迭代推荐需求时触发。
-
----
-
-## 📝 2026-07-07 16:52:10
-
-**原始Prompt**: 湿实验结果被存储在/mnt/nas/opencode_data_2/runjob/experiment_results中，请分析样本一和样本二在所有实验上的结果，配置文件也在相同目录中，最终给出总体对比结果。
-
-**Pipeline类型**: lab_analysis
-
-用户prompt包含湿实验数据存储路径、两个特定样本、配置文件位置和总体对比需求，触发lab_analysis pipeline。关键特征：'湿实验结果'指定数据类型，'样本一和样本二'需批量对比，'配置文件'提供分析方法，'总体对比结果'要求汇总分析。对应lab_analysis的batch模式，处理2个样本与4个实验交叉的8项分析。
-
----
-
 ## 📝 2026-07-07 16:52:51
 
 **原始Prompt**: 湿实验结果被存储在/mnt/nas/opencode_data_2/runjob/experiment_results中，请分析样本一和样本二在所有实验上的结果，配置文件也在相同目录中，最终给出总体对比结果。
@@ -1004,6 +984,26 @@ Prompt包含配体库优化、产率预测模型训练、Top unseen配体筛选�
 **Pipeline类型**: reaction_optimization
 
 含“配体库优化/产率预测/未见配体筛选/结构图/实验室验证”等关键词，路由至 reaction_optimization；阶段固定为 reaction_plan → reaction_execute → lab_submission。提供 .xlsx 训练数据时触发产率模型训练与虚拟筛选，输出推荐配体并送实验验证。
+
+---
+
+## 📝 2026-08-18 09:34:18
+
+**原始Prompt**: 对phosphine膦配体库进行配体优化，使用 ligand-match-fix_replaced.xlsx 数据训练产率预测模型，筛选top未见配体（top unseen ligands），并生成推荐配体的分子结构图。推荐结果发送实验室验证。
+
+**Pipeline类型**: reaction_optimization
+
+含配体优化、产率预测模型、top unseen ligands、分子结构图、实验室验证等关键词 → 路由到 reaction_optimization 流水线。执行顺序：reaction_plan（数据加载与建模）→ reaction_execute（预测、筛选top unseen ligands、生成结构图）→ lab_submission（提交推荐配体）。
+
+---
+
+## 📝 2026-08-18 09:40:45
+
+**原始Prompt**: 对phosphine膦配体库进行配体优化，使用 ligand-match-fix_replaced.xlsx 数据训练产率预测模型，筛选top未见配体（top unseen ligands），并生成推荐配体的分子结构图。推荐结果发送实验室验证。
+
+**Pipeline类型**: reaction_optimization
+
+识别关键词：膦配体/配体库优化、产率预测模型、top unseen ligands、分子结构图、实验室验证。此类需求路由至 reaction_optimization，阶段为 reaction_plan → reaction_execute → lab_submission；不要错分到单一分子生成或逆合成流程。
 
 ---
 

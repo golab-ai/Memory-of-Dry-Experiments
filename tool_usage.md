@@ -4,32 +4,6 @@
 
 ---
 
-## 📝 2026-07-07 16:33:41
-
-**原始Prompt**: 为Suzuki E/Z选择性相关反应推荐最高转化率的反应条件，优化catalyst、base、solvent和cosolvent组合，使用 suzuki-ez.xlsx数据进行主动学习迭代优化。
-
-**Pipeline类型**: reaction_optimization
-
-使用 custom_bayesian_optimizer 工具：
-- 加载数据: 指定 suzuki-ez.xlsx，解析因子（catalyst, base, solvent, cosolvent）和响应（conversion）。
-- 构建候选空间: 定义各变量的离散选项（从数据列提取）。
-- 执行主动学习循环: 初始训练集为已有数据，每次迭代利用高斯过程模型推荐下一实验条件，最大迭代数设为10。
-- 输出: 返回预测最优条件及预期转化率。
-
----
-
-## 📝 2026-07-07 16:39:44
-
-**原始Prompt**: 请基于工作目录中 HPK1_clean.pdb 蛋白结构，进行靶向分子生成并规划合成路线。
-
-**Pipeline类型**: drug_design_synthesis
-
-- **Structure Preparation**: 使用 PDBFixer 清理蛋白结构，补全缺失原子、移除异质分子。
-- **Molecule Generation**: 调用基于结构的生成模型（如 Pocket2Mol/LiGAN 等工具），以口袋残基为条件生成小分子。
-- **Synthesis Planning**: 使用逆合成工具（如 AiZynthFinder 或 ASKCOS），设置最大深度、起始物料商品库，进行路线规划。
-
----
-
 ## 📝 2026-07-07 16:49:33
 
 **原始Prompt**: 为Buchwald-Hartwig胺化反应进行配体、碱和添加剂的条件优化，基于实验数据 Buchwald-HartwigDataset.csv进行迭代优化，推荐下一批最值得测试的实验组合。
@@ -1205,6 +1179,29 @@ experiment_download: 下载指定分析目录下的实验数据；file_match: �
 **Pipeline类型**: reaction_optimization
 
 训练数据：ligand-match-fix_replaced.xlsx，读取配体ID、SMILES、产率标签。模型：优先使用随机森林或XGBoost回归预测产率；用RDKit计算分子描述符并生成推荐配体结构图（PNG）。实验室提交：lab_submission工具传递推荐配体列表、预测产率和结构图路径。
+
+---
+
+## 📝 2026-08-18 09:34:18
+
+**原始Prompt**: 对phosphine膦配体库进行配体优化，使用 ligand-match-fix_replaced.xlsx 数据训练产率预测模型，筛选top未见配体（top unseen ligands），并生成推荐配体的分子结构图。推荐结果发送实验室验证。
+
+**Pipeline类型**: reaction_optimization
+
+- pandas 读取 ligand-match-fix_replaced.xlsx，校验SMILES和产率列
+- scikit-learn 随机森林/梯度提升回归模型预测产率
+- RDKit 从SMILES生成分子结构图
+- lab_submission 工具提交推荐配体及预测产率
+
+---
+
+## 📝 2026-08-18 09:40:45
+
+**原始Prompt**: 对phosphine膦配体库进行配体优化，使用 ligand-match-fix_replaced.xlsx 数据训练产率预测模型，筛选top未见配体（top unseen ligands），并生成推荐配体的分子结构图。推荐结果发送实验室验证。
+
+**Pipeline类型**: reaction_optimization
+
+read_excel: 读取 ligand-match-fix_replaced.xlsx，指定 SMILES 和 yield 列。train_yield_model: 输入配体描述符与产率，训练回归模型。predict_unseen: 对未见配体批量预测并排序。draw_molecule: 用 RDKit 为 top 配体生成结构图（PNG/SVG）。submit_lab: 发送推荐列表，包含配体ID、SMILES、预测产率、图像路径。
 
 ---
 

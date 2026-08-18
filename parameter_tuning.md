@@ -961,3 +961,25 @@ Best parameters for RandomForestRegressor: n_estimators=200, max_depth=8, min_sa
 
 ---
 
+## 📝 2026-08-18 09:34:18
+
+**原始Prompt**: 对phosphine膦配体库进行配体优化，使用 ligand-match-fix_replaced.xlsx 数据训练产率预测模型，筛选top未见配体（top unseen ligands），并生成推荐配体的分子结构图。推荐结果发送实验室验证。
+
+**Pipeline类型**: reaction_optimization
+
+- 随机森林 n_estimators=300, max_depth=8, min_samples_leaf=2, random_state=42
+- 5折交叉验证评估；按预测产率降序取top 10-20未见配体
+- RDKit 图像尺寸300x300，标注配体编号和预测产率
+
+---
+
+## 📝 2026-08-18 09:40:45
+
+**原始Prompt**: 对phosphine膦配体库进行配体优化，使用 ligand-match-fix_replaced.xlsx 数据训练产率预测模型，筛选top未见配体（top unseen ligands），并生成推荐配体的分子结构图。推荐结果发送实验室验证。
+
+**Pipeline类型**: reaction_optimization
+
+模型：优先使用梯度提升/XGBoost，n_estimators=200，learning_rate=0.05，做 5-fold CV。数据划分：test_size=0.2，固定随机种子。top_k=5-10；若候选较多，可先按预测产率取 top 50，再用 Tanimoto ≤0.8 做多样性过滤。分子结构图：size=300x300，输出 PNG。
+
+---
+
